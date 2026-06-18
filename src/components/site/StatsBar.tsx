@@ -1,0 +1,40 @@
+import type { LucideIcon } from "lucide-react";
+
+export interface Stat {
+  icon: LucideIcon;
+  number: string;
+  label: string;
+}
+
+export function StatsBar({ stats, variant = "light" }: { stats: Stat[]; variant?: "light" | "dark" }) {
+  const dark = variant === "dark";
+  return (
+    <div
+      className={`grid grid-cols-2 lg:grid-cols-4 ${
+        dark ? "" : "border-y border-border bg-secondary"
+      }`}
+    >
+      {stats.map((s, i) => {
+        const Icon = s.icon;
+        return (
+          <div
+            key={i}
+            className={`flex flex-col items-start gap-3 px-6 py-8 lg:px-10 lg:py-10 ${
+              i < stats.length - 1 ? "lg:border-r" : ""
+            } ${i < 2 ? "border-b lg:border-b-0" : ""} ${i % 2 === 0 ? "border-r lg:border-r" : ""} ${
+              dark ? "border-primary-foreground/10" : "border-border"
+            }`}
+          >
+            <Icon size={22} className="text-bronze" strokeWidth={1.5} />
+            <div className={`font-serif text-3xl lg:text-4xl ${dark ? "text-primary-foreground" : "text-primary"}`}>
+              {s.number}
+            </div>
+            <div className={`text-sm ${dark ? "text-primary-foreground/70" : "text-muted-foreground"}`}>
+              {s.label}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
