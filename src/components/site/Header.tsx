@@ -1,6 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
+import logoAsset from "@/assets/WM_Legal_Services_Logo.png.asset.json";
 
 const nav = [
   { to: "/", label: "Home" },
@@ -29,9 +30,11 @@ export function Header() {
     >
       <div className="container-prose flex h-20 items-center justify-between gap-6">
         <Link to="/" className="flex items-center gap-2 group" onClick={() => setOpen(false)}>
-          <span className="font-serif text-xl tracking-tight text-primary">
-            WM <span className="text-bronze">·</span> Legal Services
-          </span>
+          <img
+            src={logoAsset.url}
+            alt="WM Legal Services"
+            className="h-10 w-auto object-contain"
+          />
         </Link>
 
         <nav className="hidden md:flex items-center gap-8">
