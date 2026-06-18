@@ -1,29 +1,216 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import {
+  Shield, TrendingDown, CheckCircle2, Briefcase, Home, Building2, RefreshCw,
+  Gavel, MessageSquare, Compass, Users, Play,
+} from "lucide-react";
+import heroImg from "@/assets/hero.jpg";
+import propertyImg from "@/assets/property.jpg";
+import auctionImg from "@/assets/auction.jpg";
+import { StatsBar } from "@/components/site/StatsBar";
+import { Testimonials } from "@/components/site/Testimonials";
+import { CTABanner } from "@/components/site/CTABanner";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Your App" },
-      { name: "description", content: "Replace this with a one-sentence description of your app." },
-      { property: "og:title", content: "Your App" },
-      { property: "og:description", content: "Replace this with a one-sentence description of your app." },
+      { title: "WM Legal Services — Property Law, Done Properly" },
+      { name: "description", content: "Specialist conveyancing for homebuyers, sellers, auction clients and introducers. Operating under Taylor Rose." },
+      { property: "og:title", content: "WM Legal Services — Property Law, Done Properly" },
+      { property: "og:description", content: "Specialist conveyancing for homebuyers, sellers, auction clients and introducers." },
     ],
   }),
-  component: Index,
+  component: HomePage,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
+function HomePage() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
+    <>
+      {/* Hero */}
+      <section className="relative isolate overflow-hidden bg-primary">
+        <img
+          src={heroImg}
+          alt="London skyline at dusk"
+          width={1920}
+          height={1280}
+          className="absolute inset-0 h-full w-full object-cover opacity-40"
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/95 via-primary/85 to-primary/70" />
+        <div className="container-prose relative py-28 md:py-40 text-primary-foreground">
+          <div className="max-w-3xl">
+            <span className="eyebrow text-bronze">Specialist Property Law</span>
+            <h1 className="mt-6 font-serif text-5xl md:text-7xl leading-[1.05] text-primary-foreground">
+              Property Law,<br />Done Properly.
+            </h1>
+            <p className="mt-7 text-lg md:text-xl text-primary-foreground/80 max-w-2xl leading-relaxed">
+              Specialist conveyancing for homebuyers, sellers, auction clients and the introducers
+              who trust us with their referrals.
+            </p>
+            <div className="mt-10 flex flex-wrap gap-3">
+              <Link to="/contact" hash="quote" className="inline-flex items-center justify-center rounded-sm bg-bronze px-7 py-3.5 text-sm font-medium text-accent-foreground hover:opacity-90 transition-opacity">
+                Get a Quote
+              </Link>
+              <Link to="/contact" hash="call" className="inline-flex items-center justify-center rounded-sm border border-primary-foreground/30 px-7 py-3.5 text-sm font-medium text-primary-foreground hover:bg-primary-foreground/10 transition-colors">
+                Book a Call
+              </Link>
+              <Link to="/services" hash="partner-with-us" className="inline-flex items-center justify-center rounded-sm border border-primary-foreground/30 px-7 py-3.5 text-sm font-medium text-primary-foreground hover:bg-primary-foreground/10 transition-colors">
+                Partner With Us
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Stats */}
+      <StatsBar
+        stats={[
+          { icon: Shield, number: "No Sale,", label: "No Fee" },
+          { icon: TrendingDown, number: "9.2%", label: "Fall-through rate" },
+          { icon: CheckCircle2, number: "1000s", label: "Transactions completed" },
+          { icon: Briefcase, number: "Specialist", label: "Property law team" },
+        ]}
       />
-    </div>
+
+      {/* Services */}
+      <section className="py-20 md:py-28">
+        <div className="container-prose">
+          <div className="max-w-2xl">
+            <span className="eyebrow">Our Expertise</span>
+            <h2 className="mt-4 text-4xl md:text-5xl">How we can help</h2>
+            <p className="mt-5 text-muted-foreground">
+              A full-service property law team covering everyday conveyancing, complex transactions
+              and dedicated panel management for introducers.
+            </p>
+          </div>
+
+          <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+            {[
+              { icon: Home, t: "Residential & Commercial Conveyancing", d: "End-to-end conveyancing for sales, purchases and remortgages." },
+              { icon: Users, t: "Conveyancing Panel Management", d: "A dedicated extension of your business, from quote to completion." },
+              { icon: RefreshCw, t: "Refinance", d: "Fast, accurate remortgage transactions with clear communication." },
+              { icon: Building2, t: "New Build", d: "Specialist handling of tight builder deadlines and reservation contracts." },
+            ].map(({ icon: I, t, d }) => (
+              <div key={t} className="bg-card border border-border rounded-md p-7 hover:shadow-[var(--shadow-card)] transition-shadow">
+                <I size={24} className="text-bronze" strokeWidth={1.5} />
+                <h3 className="mt-5 text-lg font-medium text-primary">{t}</h3>
+                <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{d}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Auction spotlight */}
+          <div className="mt-10 relative overflow-hidden rounded-md bg-primary text-primary-foreground">
+            <img src={auctionImg} alt="" loading="lazy" width={1280} height={832}
+              className="absolute inset-0 h-full w-full object-cover opacity-20" />
+            <div className="absolute inset-0 bg-gradient-to-r from-primary via-primary/95 to-primary/60" />
+            <div className="relative grid md:grid-cols-[1.2fr_1fr] gap-10 p-10 md:p-14 items-center">
+              <div>
+                <span className="eyebrow text-bronze">Our Specialism</span>
+                <h3 className="mt-4 font-serif text-3xl md:text-4xl text-primary-foreground">
+                  Auction Conveyancing Specialists
+                </h3>
+                <p className="mt-5 text-primary-foreground/80 leading-relaxed max-w-xl">
+                  Fast legal pack reviews, fixed-fee options, and a dedicated team built to work to
+                  auction deadlines — for buyers, sellers, investors, developers and auction houses.
+                </p>
+                <Link to="/services" hash="auctions"
+                  className="mt-7 inline-flex items-center gap-2 rounded-sm bg-bronze px-6 py-3 text-sm font-medium text-accent-foreground hover:opacity-90 transition-opacity">
+                  Explore Auction Services →
+                </Link>
+              </div>
+              <div className="hidden md:flex items-center justify-center">
+                <Gavel size={140} strokeWidth={0.7} className="text-bronze/80" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Video */}
+      <section className="bg-secondary py-20 md:py-28">
+        <div className="container-prose grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <span className="eyebrow">Introduction</span>
+            <h2 className="mt-4 text-4xl md:text-5xl">Meet William Michael</h2>
+            <p className="mt-5 text-muted-foreground leading-relaxed max-w-lg">
+              Hear directly from our founder on what sets WM Legal Services apart — and why
+              specialist property expertise matters more than ever.
+            </p>
+          </div>
+          <div className="relative aspect-video rounded-md overflow-hidden bg-primary group cursor-pointer">
+            {/* TODO: embed introduction video from William Michael */}
+            <img src={propertyImg} alt="Introduction video placeholder"
+              loading="lazy" width={1280} height={832}
+              className="absolute inset-0 h-full w-full object-cover opacity-60 group-hover:opacity-70 transition-opacity" />
+            <div className="absolute inset-0 grid place-items-center">
+              <div className="h-20 w-20 rounded-full bg-bronze grid place-items-center shadow-[var(--shadow-card)] group-hover:scale-105 transition-transform">
+                <Play size={28} className="text-accent-foreground ml-1" fill="currentColor" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Why */}
+      <section className="py-20 md:py-28">
+        <div className="container-prose">
+          <div className="max-w-2xl">
+            <span className="eyebrow">Why Choose Us</span>
+            <h2 className="mt-4 text-4xl md:text-5xl">A different kind of property team</h2>
+          </div>
+          <div className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+            {[
+              { i: MessageSquare, t: "Strong communication", d: "We pick up the phone, return emails and keep every party informed." },
+              { i: Compass, t: "Commercial approach", d: "Pragmatic, deal-driven advice — not box-ticking." },
+              { i: TrendingDown, t: "Low fall-through", d: "A 9.2% fall-through rate. The industry average is well over double." },
+              { i: Briefcase, t: "Specialists, not generalists", d: "A dedicated property law team — this is all we do." },
+            ].map(({ i: I, t, d }) => (
+              <div key={t}>
+                <I size={22} className="text-bronze" strokeWidth={1.5} />
+                <h3 className="mt-5 text-lg font-medium text-primary">{t}</h3>
+                <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{d}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <Testimonials />
+
+      {/* Panel mgmt teaser */}
+      <section className="py-20 md:py-28">
+        <div className="container-prose grid lg:grid-cols-2 gap-14 items-center">
+          <div>
+            <span className="eyebrow">For Introducers</span>
+            <h2 className="mt-4 text-4xl md:text-5xl">Panel management, properly run</h2>
+            <p className="mt-5 text-muted-foreground leading-relaxed">
+              We act as a dedicated extension of your business — quoting leads, allocating
+              instructions, monitoring capacity, and handling escalations — so your clients receive
+              the level of service your brand demands.
+            </p>
+            <Link to="/services" hash="panel-management"
+              className="mt-8 inline-flex items-center gap-2 rounded-sm bg-primary px-6 py-3 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors">
+              Learn About Panel Management →
+            </Link>
+          </div>
+          <div className="bg-secondary border border-border rounded-md p-10">
+            <div className="grid grid-cols-2 gap-8">
+              {[
+                { n: "1 lead", l: "Single point of contact" },
+                { n: "Same day", l: "Quote turnaround" },
+                { n: "Live", l: "Pipeline reporting" },
+                { n: "Direct", l: "Escalation route" },
+              ].map((s) => (
+                <div key={s.n}>
+                  <div className="font-serif text-2xl text-primary">{s.n}</div>
+                  <div className="text-xs uppercase tracking-wider text-muted-foreground mt-1">{s.l}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <CTABanner />
+    </>
   );
 }
