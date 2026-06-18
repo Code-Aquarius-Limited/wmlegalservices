@@ -4,7 +4,6 @@ import {
   Gavel, Users, Handshake, UserSquare2, FileSearch, ListChecks, BadgeCheck,
   Briefcase, Download, PhoneCall, ChevronRight,
 } from "lucide-react";
-import { EnquiryForm } from "@/components/site/EnquiryForm";
 import { BackToTop } from "@/components/site/BackToTop";
 import { CTABanner } from "@/components/site/CTABanner";
 import auctionImg from "@/assets/auction.jpg";
