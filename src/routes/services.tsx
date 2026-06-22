@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   Home, Building2, RefreshCw, FileSignature, KeyRound, HandCoins, ShieldCheck,
-  Gavel, Users, FileSearch, ListChecks, BadgeCheck,
+  Gavel, Users, Handshake, FileSearch, ListChecks, BadgeCheck,
   Briefcase, Download, PhoneCall, ChevronRight,
 } from "lucide-react";
 import { BackToTop } from "@/components/site/BackToTop";
