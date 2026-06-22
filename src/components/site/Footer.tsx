@@ -11,7 +11,7 @@ export function Footer() {
             <img
               src={logoAsset.url}
               alt="WM Legal Services"
-              className="h-10 w-auto object-contain"
+              className="h-24 w-auto object-contain"
             />
           </div>
           <p className="mt-4 text-sm text-primary-foreground/70 leading-relaxed">
