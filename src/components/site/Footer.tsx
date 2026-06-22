@@ -56,7 +56,7 @@ export function Footer() {
             <li><Link to="/services" className="text-primary-foreground/80 hover:text-bronze">Our Services</Link></li>
             <li><Link to="/services" hash="auctions" className="text-primary-foreground/80 hover:text-bronze">Auction Conveyancing</Link></li>
             <li><Link to="/services" hash="panel-management" className="text-primary-foreground/80 hover:text-bronze">Panel Management</Link></li>
-            <li><Link to="/services" hash="partner-with-us" className="text-primary-foreground/80 hover:text-bronze">Partner With Us</Link></li>
+            <li><Link to="/" hash="partner-with-us" className="text-primary-foreground/80 hover:text-bronze">Partner With Us</Link></li>
             <li><Link to="/contact" className="text-primary-foreground/80 hover:text-bronze">Contact</Link></li>
           </ul>
         </div>
