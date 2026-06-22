@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Instagram, Mail, Phone, MapPin } from "lucide-react";
-import logoAsset from "@/assets/WM_Legal_Services_Logo.png.asset.json";
+import logoAsset from "@/assets/WM_Legal_Services_Logo_white.png.asset.json";
 
 export function Footer() {
   return (
