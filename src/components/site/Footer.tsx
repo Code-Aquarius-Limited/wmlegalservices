@@ -42,8 +42,8 @@ export function Footer() {
             </li>
             <li className="flex items-start gap-3">
               <MapPin size={14} className="mt-1 shrink-0" />
-              {/* TODO: insert real office address */}
-              <span>1 Property Lane, London, EC1A 1AA</span>
+              <span>30 Churchill Place, London, E14 5RE</span>
+
             </li>
           </ul>
         </div>

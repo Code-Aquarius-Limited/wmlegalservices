@@ -61,8 +61,8 @@ function ContactPage() {
                   <MapPin size={16} className="mt-0.5 text-bronze shrink-0" />
                   <div>
                     <div className="text-xs uppercase tracking-wider text-muted-foreground">Office</div>
-                    {/* TODO: insert real office address */}
-                    <div className="font-medium text-foreground">1 Property Lane<br />London, EC1A 1AA</div>
+                    <div className="font-medium text-foreground">30 Churchill Place<br />London, E14 5RE</div>
+
                   </div>
                 </li>
               </ul>
