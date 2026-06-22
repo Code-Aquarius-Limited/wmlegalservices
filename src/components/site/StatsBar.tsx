@@ -19,7 +19,8 @@ export function StatsBar({ stats, variant = "light" }: { stats: Stat[]; variant?
         return (
           <div
             key={i}
-            className={`flex flex-col items-start gap-3 px-6 py-8 lg:px-10 lg:py-10 ${
+            style={{ animationDelay: `${i * 150}ms`, animationFillMode: "both" }}
+            className={`flex flex-col items-start gap-3 px-6 py-8 lg:px-10 lg:py-10 animate-in fade-in slide-in-from-bottom-2 duration-700 ${
               i < stats.length - 1 ? "lg:border-r" : ""
             } ${i < 2 ? "border-b lg:border-b-0" : ""} ${i % 2 === 0 ? "border-r lg:border-r" : ""} ${
               dark ? "border-primary-foreground/10" : "border-border"
