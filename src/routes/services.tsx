@@ -24,7 +24,6 @@ const pillars = [
   { id: "conveyancing", icon: Home, t: "Conveyancing & Property Services", d: "Sales, purchases, remortgages and the full range of residential and commercial work." },
   { id: "auctions", icon: Gavel, t: "Auction Conveyancing", d: "Our specialism — fast legal pack reviews and full auction transaction handling.", spotlight: true },
   { id: "panel-management", icon: Users, t: "Panel Management", d: "A dedicated extension of estate agency and mortgage brokerage businesses." },
-  { id: "partner-with-us", icon: Handshake, t: "Partner With Us", d: "Service standards, no sale no fee model, and a low fall-through rate for introducers." },
 ];
 
 function ServicesPage() {
