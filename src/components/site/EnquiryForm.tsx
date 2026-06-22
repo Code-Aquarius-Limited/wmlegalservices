@@ -44,7 +44,7 @@ export function EnquiryForm({
     const message = String(fd.get("message") || "").trim();
     const subject = encodeURIComponent(SUBJECTS[type]);
     const body = encodeURIComponent(
-      `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nSchedule a call: ${scheduleCall || "Not requested"}\nEnquiry type: ${type}\n\nMessage:\n${message}`,
+      `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nDiscovery call date: ${scheduleCall || "Not requested"}\nEnquiry type: ${type}\n\nMessage:\n${message}`,
     );
     // TODO: replace with Formspree / Cloud function submission to enquiries@wmlegalservices.co.uk
     window.location.href = `mailto:enquiries@wmlegalservices.co.uk?subject=${subject}&body=${body}`;
@@ -85,7 +85,7 @@ export function EnquiryForm({
       </div>
 
       <div className="mt-4 flex flex-col">
-        <label className="text-xs font-medium text-foreground/80 mb-1.5">Schedule a call</label>
+        <label className="text-xs font-medium text-foreground/80 mb-1.5">Schedule a date for a discovery call</label>
         <input
           type="date"
           name="scheduleCall"
