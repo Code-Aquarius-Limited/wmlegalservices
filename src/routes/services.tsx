@@ -228,7 +228,7 @@ function ServicesPage() {
       <section id="panel-management" className="py-20 md:py-28 scroll-mt-20">
         <div className="container-prose grid lg:grid-cols-[1fr_1.2fr] gap-14">
           <div>
-            <span className="eyebrow">Pillar 03</span>
+            <span className="eyebrow">Panel Management</span>
             <h2 className="mt-4 text-4xl md:text-5xl">Panel management for estate agents &amp; mortgage brokers</h2>
           </div>
           <div className="space-y-5 text-foreground/85 leading-relaxed">
