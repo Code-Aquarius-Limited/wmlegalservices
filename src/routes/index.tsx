@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   Shield, TrendingDown, CheckCircle2, Briefcase, Home, Building2, RefreshCw,
-  Gavel, MessageSquare, Compass, Users, Play,
+  Gavel, MessageSquare, Compass, Users, UserSquare2, Play,
 } from "lucide-react";
 import heroImg from "@/assets/hero.jpg";
 import propertyImg from "@/assets/property.jpg";
