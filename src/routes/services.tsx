@@ -76,7 +76,7 @@ function ServicesPage() {
       <section id="conveyancing" className="bg-secondary py-20 md:py-28 scroll-mt-20">
         <div className="container-prose">
           <div className="max-w-2xl">
-            <span className="eyebrow">Pillar 01</span>
+            <span className="eyebrow">Core Conveyancing</span>
             <h2 className="mt-4 text-4xl md:text-5xl">Conveyancing &amp; property services</h2>
             <p className="mt-5 text-muted-foreground leading-relaxed">
               Plain-English, deal-driven property law across the spectrum of residential and
