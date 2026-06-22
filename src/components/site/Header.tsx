@@ -1,12 +1,18 @@
 import { Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import logoAsset from "@/assets/WM_Legal_Services_Logo.png.asset.json";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
-const nav = [
-  { to: "/", label: "Home" },
-  { to: "/services", label: "Our Services" },
-  { to: "/contact", label: "Contact Us" },
+const serviceLinks = [
+  { to: "/services", hash: "conveyancing", label: "Conveyancing & Property Services" },
+  { to: "/services", hash: "auctions", label: "Auction Conveyancing Specialists" },
+  { to: "/services", hash: "panel-management", label: "Panel Management" },
 ] as const;
 
 export function Header() {
@@ -37,18 +43,51 @@ export function Header() {
           />
         </Link>
 
+        {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-8">
-          {nav.map((n) => (
-            <Link
-              key={n.to}
-              to={n.to}
-              className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
-              activeProps={{ className: "text-primary" }}
-              activeOptions={{ exact: n.to === "/" }}
+          <Link
+            to="/"
+            className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
+            activeProps={{ className: "text-primary" }}
+            activeOptions={{ exact: true }}
+          >
+            Home
+          </Link>
+
+          <DropdownMenu>
+            <DropdownMenuTrigger
+              className="group inline-flex items-center gap-1 text-sm font-medium text-foreground/80 hover:text-primary transition-colors focus:outline-none data-[state=open]:text-primary"
             >
-              {n.label}
-            </Link>
-          ))}
+              Our Services
+              <ChevronDown
+                size={14}
+                className="shrink-0 transition-transform duration-200 group-data-[state=open]:rotate-180"
+              />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="start" className="min-w-[16rem]">
+              {serviceLinks.map((s) => (
+                <DropdownMenuItem key={s.hash} asChild>
+                  <Link
+                    to={s.to}
+                    hash={s.hash}
+                    className="cursor-pointer"
+                  >
+                    {s.label}
+                  </Link>
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
+
+          <Link
+            to="/contact"
+            className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
+            activeProps={{ className: "text-primary" }}
+            activeOptions={{ exact: true }}
+          >
+            Contact Us
+          </Link>
+
           <Link
             to="/contact"
             hash="quote"
@@ -67,19 +106,44 @@ export function Header() {
         </button>
       </div>
 
+      {/* Mobile nav */}
       {open && (
         <div className="md:hidden border-t border-border bg-background">
-          <div className="container-prose py-4 flex flex-col gap-1">
-            {nav.map((n) => (
-              <Link
-                key={n.to}
-                to={n.to}
-                onClick={() => setOpen(false)}
-                className="py-3 text-sm font-medium text-foreground/80 border-b border-border/60 last:border-0"
-              >
-                {n.label}
-              </Link>
-            ))}
+          <div className="container-prose py-4 flex flex-col">
+            <Link
+              to="/"
+              onClick={() => setOpen(false)}
+              className="py-3 text-sm font-medium text-foreground/80 border-b border-border/60"
+            >
+              Home
+            </Link>
+
+            <div className="py-3 border-b border-border/60">
+              <span className="text-sm font-medium text-foreground/80">Our Services</span>
+              <ul className="mt-2 ml-3 space-y-1 border-l border-border pl-3">
+                {serviceLinks.map((s) => (
+                  <li key={s.hash}>
+                    <Link
+                      to={s.to}
+                      hash={s.hash}
+                      onClick={() => setOpen(false)}
+                      className="block py-1.5 text-sm text-foreground/70 hover:text-primary"
+                    >
+                      {s.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <Link
+              to="/contact"
+              onClick={() => setOpen(false)}
+              className="py-3 text-sm font-medium text-foreground/80 border-b border-border/60"
+            >
+              Contact Us
+            </Link>
+
             <Link
               to="/contact"
               hash="quote"
