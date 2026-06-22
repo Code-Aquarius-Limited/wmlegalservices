@@ -49,25 +49,20 @@ function ServicesPage() {
           <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {pillars.map((p) => {
               const I = p.icon;
-              const spotlight = p.spotlight;
               return (
                 <a
                   key={p.id}
                   href={`#${p.id}`}
-                  className={`group block rounded-md border p-7 transition-all ${
-                    spotlight
-                      ? "bg-primary text-primary-foreground border-primary shadow-[var(--shadow-card)]"
-                      : "bg-card border-border hover:shadow-[var(--shadow-card)]"
-                  }`}
+                  className="group block rounded-md border border-border bg-card p-7 transition-all hover:bg-primary hover:border-primary hover:shadow-[var(--shadow-card)]"
                 >
-                  <I size={24} strokeWidth={1.5} className={spotlight ? "text-bronze" : "text-bronze"} />
-                  <h3 className={`mt-5 text-lg font-medium ${spotlight ? "text-primary-foreground" : "text-primary"}`}>
+                  <I size={24} strokeWidth={1.5} className="text-bronze" />
+                  <h3 className="mt-5 text-lg font-medium text-primary transition-colors group-hover:text-bronze">
                     {p.t}
                   </h3>
-                  <p className={`mt-2 text-sm leading-relaxed ${spotlight ? "text-primary-foreground/75" : "text-muted-foreground"}`}>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground transition-colors group-hover:text-bronze/80">
                     {p.d}
                   </p>
-                  <span className={`mt-5 inline-flex items-center gap-1 text-sm font-medium ${spotlight ? "text-bronze" : "text-primary group-hover:text-bronze"} transition-colors`}>
+                  <span className="mt-5 inline-flex items-center gap-1 text-sm font-medium text-primary transition-colors group-hover:text-bronze">
                     Read more <ChevronRight size={14} />
                   </span>
                 </a>
