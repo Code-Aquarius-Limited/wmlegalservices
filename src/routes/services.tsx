@@ -42,12 +42,8 @@ function ServicesPage() {
       }
     };
 
-    // Scroll immediately, then again after a short delay so the scroll
-    // isn't cancelled by the router's own scroll restoration on client-side
-    // navigation from the header dropdown.
-    scrollToSection();
-    const timer = setTimeout(scrollToSection, 120);
-    return () => clearTimeout(timer);
+    const frame = window.requestAnimationFrame(scrollToSection);
+    return () => window.cancelAnimationFrame(frame);
   }, [hash]);
 
   return (

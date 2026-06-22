@@ -1,5 +1,5 @@
-import { Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "@tanstack/react-router";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import logoAsset from "@/assets/WM_Legal_Services_Logo.png.asset.json";
 import {
@@ -18,6 +18,10 @@ const serviceLinks = [
 export function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const closeServicesTimer = useRef<number | null>(null);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -25,6 +29,40 @@ export function Header() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    return () => {
+      if (closeServicesTimer.current) window.clearTimeout(closeServicesTimer.current);
+    };
+  }, []);
+
+  const openServicesMenu = () => {
+    if (closeServicesTimer.current) window.clearTimeout(closeServicesTimer.current);
+    setServicesOpen(true);
+  };
+
+  const closeServicesMenu = () => {
+    if (closeServicesTimer.current) window.clearTimeout(closeServicesTimer.current);
+    closeServicesTimer.current = window.setTimeout(() => setServicesOpen(false), 120);
+  };
+
+  const scrollToService = (hash: string) => {
+    const el = document.getElementById(hash);
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
+  const handleServiceClick = async (event: MouseEvent<HTMLAnchorElement>, hash: string) => {
+    event.preventDefault();
+    setServicesOpen(false);
+    setOpen(false);
+
+    if (location.pathname === "/services" && location.hash?.replace("#", "") === hash) {
+      scrollToService(hash);
+      return;
+    }
+
+    await navigate({ to: "/services", hash, resetScroll: false });
+  };
 
   return (
     <header
@@ -54,8 +92,14 @@ export function Header() {
             Home
           </Link>
 
-          <DropdownMenu>
+          <DropdownMenu open={servicesOpen} onOpenChange={setServicesOpen}>
             <DropdownMenuTrigger
+              onPointerEnter={openServicesMenu}
+              onPointerMove={openServicesMenu}
+              onMouseEnter={openServicesMenu}
+              onMouseMove={openServicesMenu}
+              onMouseLeave={closeServicesMenu}
+              onFocus={openServicesMenu}
               className="group inline-flex items-center gap-1 text-sm font-medium text-foreground/80 hover:text-primary transition-colors focus:outline-none data-[state=open]:text-primary"
             >
               Our Services
@@ -64,16 +108,24 @@ export function Header() {
                 className="shrink-0 transition-transform duration-200 group-data-[state=open]:rotate-180"
               />
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="start" className="min-w-[16rem]">
+            <DropdownMenuContent
+              align="start"
+              onPointerEnter={openServicesMenu}
+              onPointerMove={openServicesMenu}
+              onMouseEnter={openServicesMenu}
+              onMouseMove={openServicesMenu}
+              onMouseLeave={closeServicesMenu}
+              className="min-w-[16rem]"
+            >
               {serviceLinks.map((s) => (
                 <DropdownMenuItem key={s.hash} asChild>
-                  <Link
-                    to={s.to}
-                    hash={s.hash}
+                  <a
+                    href={`${s.to}#${s.hash}`}
+                    onClick={(event) => handleServiceClick(event, s.hash)}
                     className="cursor-pointer"
                   >
                     {s.label}
-                  </Link>
+                  </a>
                 </DropdownMenuItem>
               ))}
             </DropdownMenuContent>
@@ -123,14 +175,13 @@ export function Header() {
               <ul className="mt-2 ml-3 space-y-1 border-l border-border pl-3">
                 {serviceLinks.map((s) => (
                   <li key={s.hash}>
-                    <Link
-                      to={s.to}
-                      hash={s.hash}
-                      onClick={() => setOpen(false)}
+                    <a
+                      href={`${s.to}#${s.hash}`}
+                      onClick={(event) => handleServiceClick(event, s.hash)}
                       className="block py-1.5 text-sm text-foreground/70 hover:text-primary"
                     >
                       {s.label}
-                    </Link>
+                    </a>
                   </li>
                 ))}
               </ul>
