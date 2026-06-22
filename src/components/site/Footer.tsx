@@ -20,9 +20,10 @@ export function Footer() {
             href="https://instagram.com/1propertylawyer"
             target="_blank"
             rel="noreferrer"
-            className="mt-6 inline-flex items-center gap-2 text-sm text-primary-foreground/80 hover:text-bronze transition-colors"
+            aria-label="Instagram @1propertylawyer"
+            className="mt-6 inline-flex items-center text-primary-foreground/80 hover:text-bronze transition-colors"
           >
-            <Instagram size={16} /> @1propertylawyer
+            <Instagram size={32} strokeWidth={1.5} />
           </a>
         </div>
 
