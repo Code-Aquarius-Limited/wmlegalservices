@@ -68,20 +68,8 @@ function ContactPage() {
               </ul>
             </div>
 
-            {/* Map placeholder */}
-            <div className="rounded-md overflow-hidden border border-border bg-secondary aspect-[4/3] grid place-items-center relative">
-              {/* TODO: replace with embedded Google Map */}
-              <div className="absolute inset-0 opacity-40"
-                style={{
-                  backgroundImage:
-                    "linear-gradient(var(--slate-blue) 1px, transparent 1px), linear-gradient(90deg, var(--slate-blue) 1px, transparent 1px)",
-                  backgroundSize: "32px 32px",
-                }} />
-              <div className="relative text-center">
-                <MapPin size={28} className="text-bronze mx-auto" />
-                <div className="mt-2 text-sm text-muted-foreground">Map placeholder</div>
-              </div>
-            </div>
+
+
 
             {/* Quick links */}
             <div className="bg-card border border-border rounded-md p-8">
