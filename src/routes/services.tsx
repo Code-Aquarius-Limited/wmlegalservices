@@ -31,9 +31,11 @@ function ServicesPage() {
   const { hash } = useLocation();
 
   useEffect(() => {
+    console.log("hash effect:", hash);
     if (!hash) return;
     const id = hash.replace("#", "");
     const el = document.getElementById(id);
+    console.log("found element:", id, el);
     if (el) {
       el.scrollIntoView({ behavior: "smooth", block: "start" });
     }
