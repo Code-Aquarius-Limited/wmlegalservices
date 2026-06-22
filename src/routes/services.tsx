@@ -28,18 +28,23 @@ const pillars = [
 ];
 
 function ServicesPage() {
-  console.log("ServicesPage render");
   const { hash } = useLocation();
 
   useEffect(() => {
-    console.log("hash effect:", hash);
-    if (!hash) return;
-    const id = hash.replace("#", "");
-    const el = document.getElementById(id);
-    console.log("found element:", id, el);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
+    const targetHash = hash || window.location.hash;
+    console.log("hash effect:", hash, "window.hash:", window.location.hash, "target:", targetHash);
+    if (!targetHash) return;
+    const id = targetHash.replace("#", "");
+    const scrollToId = () => {
+      const el = document.getElementById(id);
+      console.log("found element:", id, el);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    };
+    scrollToId();
+    const timer = setTimeout(scrollToId, 200);
+    return () => clearTimeout(timer);
   }, [hash]);
 
   return (
