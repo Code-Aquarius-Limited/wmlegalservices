@@ -1,7 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   Home, Building2, RefreshCw, FileSignature, KeyRound, HandCoins, ShieldCheck,
-  Gavel, Users, Handshake, UserSquare2, FileSearch, ListChecks, BadgeCheck,
+  Gavel, Users, Handshake, FileSearch, ListChecks, BadgeCheck,
   Briefcase, Download, PhoneCall, ChevronRight,
 } from "lucide-react";
 import { BackToTop } from "@/components/site/BackToTop";
@@ -25,7 +25,6 @@ const pillars = [
   { id: "auctions", icon: Gavel, t: "Auction Conveyancing", d: "Our specialism — fast legal pack reviews and full auction transaction handling.", spotlight: true },
   { id: "panel-management", icon: Users, t: "Panel Management", d: "A dedicated extension of estate agency and mortgage brokerage businesses." },
   { id: "partner-with-us", icon: Handshake, t: "Partner With Us", d: "Service standards, no sale no fee model, and a low fall-through rate for introducers." },
-  { id: "team", icon: UserSquare2, t: "Meet the Team", d: "The specialist property lawyers behind WM Legal Services." },
 ];
 
 function ServicesPage() {
