@@ -109,7 +109,7 @@ function ServicesPage() {
           className="absolute inset-0 h-full w-full object-cover opacity-10" />
         <div className="relative container-prose">
           <div className="max-w-3xl">
-            <span className="eyebrow text-bronze">Our Specialism · Pillar 02</span>
+            <span className="eyebrow text-bronze">Our Specialism</span>
             <h2 className="mt-4 font-serif text-4xl md:text-5xl text-primary-foreground">
               Auction conveyancing specialists
             </h2>
