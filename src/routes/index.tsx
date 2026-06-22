@@ -211,7 +211,7 @@ function HomePage() {
       <section id="partner-with-us" className="bg-secondary py-20 md:py-28 scroll-mt-20">
         <div className="container-prose">
           <div className="max-w-2xl">
-            <span className="eyebrow">Pillar 04</span>
+            <span className="eyebrow">For Introducers &amp; Partners</span>
             <h2 className="mt-4 text-4xl md:text-5xl">Partner with us</h2>
             <p className="mt-5 text-muted-foreground">
               Built for estate agents, mortgage brokers and introducers who want their clients
