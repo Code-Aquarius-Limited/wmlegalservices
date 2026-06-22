@@ -40,10 +40,11 @@ export function EnquiryForm({
     const name = String(fd.get("name") || "").trim();
     const email = String(fd.get("email") || "").trim();
     const phone = String(fd.get("phone") || "").trim();
+    const scheduleCall = String(fd.get("scheduleCall") || "").trim();
     const message = String(fd.get("message") || "").trim();
     const subject = encodeURIComponent(SUBJECTS[type]);
     const body = encodeURIComponent(
-      `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nEnquiry type: ${type}\n\nMessage:\n${message}`,
+      `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nSchedule a call: ${scheduleCall || "Not requested"}\nEnquiry type: ${type}\n\nMessage:\n${message}`,
     );
     // TODO: replace with Formspree / Cloud function submission to enquiries@wmlegalservices.co.uk
     window.location.href = `mailto:enquiries@wmlegalservices.co.uk?subject=${subject}&body=${body}`;
@@ -81,6 +82,15 @@ export function EnquiryForm({
             </select>
           </div>
         )}
+      </div>
+
+      <div className="mt-4 flex flex-col">
+        <label className="text-xs font-medium text-foreground/80 mb-1.5">Schedule a call</label>
+        <input
+          type="date"
+          name="scheduleCall"
+          className="h-11 rounded-sm border border-input bg-background px-3 text-sm focus:outline-none focus:ring-2 focus:ring-ring/40 md:w-1/2"
+        />
       </div>
 
       <div className="mt-4 flex flex-col">
