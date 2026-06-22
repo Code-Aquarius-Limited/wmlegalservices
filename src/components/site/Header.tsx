@@ -92,44 +92,38 @@ export function Header() {
             Home
           </Link>
 
-          <DropdownMenu open={servicesOpen} onOpenChange={setServicesOpen}>
-            <DropdownMenuTrigger
-              onPointerEnter={openServicesMenu}
-              onPointerMove={openServicesMenu}
-              onMouseEnter={openServicesMenu}
-              onMouseMove={openServicesMenu}
-              onMouseLeave={closeServicesMenu}
-              onFocus={openServicesMenu}
-              className="group inline-flex items-center gap-1 text-sm font-medium text-foreground/80 hover:text-primary transition-colors focus:outline-none data-[state=open]:text-primary"
-            >
-              Our Services
-              <ChevronDown
-                size={14}
-                className="shrink-0 transition-transform duration-200 group-data-[state=open]:rotate-180"
-              />
-            </DropdownMenuTrigger>
-            <DropdownMenuContent
-              align="start"
-              onPointerEnter={openServicesMenu}
-              onPointerMove={openServicesMenu}
-              onMouseEnter={openServicesMenu}
-              onMouseMove={openServicesMenu}
-              onMouseLeave={closeServicesMenu}
-              className="min-w-[16rem]"
-            >
-              {serviceLinks.map((s) => (
-                <DropdownMenuItem key={s.hash} asChild>
-                  <a
-                    href={`${s.to}#${s.hash}`}
-                    onClick={(event) => handleServiceClick(event, s.hash)}
-                    className="cursor-pointer"
-                  >
-                    {s.label}
-                  </a>
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <div onMouseEnter={openServicesMenu} onMouseLeave={closeServicesMenu}>
+            <DropdownMenu open={servicesOpen} onOpenChange={setServicesOpen}>
+              <DropdownMenuTrigger
+                onFocus={openServicesMenu}
+                className="group inline-flex items-center gap-1 text-sm font-medium text-foreground/80 hover:text-primary transition-colors focus:outline-none data-[state=open]:text-primary"
+              >
+                Our Services
+                <ChevronDown
+                  size={14}
+                  className="shrink-0 transition-transform duration-200 group-data-[state=open]:rotate-180"
+                />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent
+                align="start"
+                onMouseEnter={openServicesMenu}
+                onMouseLeave={closeServicesMenu}
+                className="min-w-[16rem]"
+              >
+                {serviceLinks.map((s) => (
+                  <DropdownMenuItem key={s.hash} asChild>
+                    <a
+                      href={`${s.to}#${s.hash}`}
+                      onClick={(event) => handleServiceClick(event, s.hash)}
+                      className="cursor-pointer"
+                    >
+                      {s.label}
+                    </a>
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
 
           <Link
             to="/contact"
