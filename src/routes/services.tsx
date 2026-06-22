@@ -76,7 +76,7 @@ function ServicesPage() {
       <section id="conveyancing" className="bg-secondary py-20 md:py-28 scroll-mt-20">
         <div className="container-prose">
           <div className="max-w-2xl">
-            <span className="eyebrow">Pillar 01</span>
+            <span className="eyebrow">Core Conveyancing</span>
             <h2 className="mt-4 text-4xl md:text-5xl">Conveyancing &amp; property services</h2>
             <p className="mt-5 text-muted-foreground leading-relaxed">
               Plain-English, deal-driven property law across the spectrum of residential and
@@ -109,7 +109,7 @@ function ServicesPage() {
           className="absolute inset-0 h-full w-full object-cover opacity-10" />
         <div className="relative container-prose">
           <div className="max-w-3xl">
-            <span className="eyebrow text-bronze">Our Specialism · Pillar 02</span>
+            <span className="eyebrow text-bronze">Our Specialism</span>
             <h2 className="mt-4 font-serif text-4xl md:text-5xl text-primary-foreground">
               Auction conveyancing specialists
             </h2>
@@ -228,7 +228,7 @@ function ServicesPage() {
       <section id="panel-management" className="py-20 md:py-28 scroll-mt-20">
         <div className="container-prose grid lg:grid-cols-[1fr_1.2fr] gap-14">
           <div>
-            <span className="eyebrow">Pillar 03</span>
+            <span className="eyebrow">Panel Management</span>
             <h2 className="mt-4 text-4xl md:text-5xl">Panel management for estate agents &amp; mortgage brokers</h2>
           </div>
           <div className="space-y-5 text-foreground/85 leading-relaxed">
@@ -255,7 +255,7 @@ function ServicesPage() {
       <section id="team" className="py-20 md:py-28 scroll-mt-20">
         <div className="container-prose">
           <div className="max-w-2xl">
-            <span className="eyebrow">Pillar 05</span>
+            <span className="eyebrow">Our People</span>
             <h2 className="mt-4 text-4xl md:text-5xl">Meet the team</h2>
             <p className="mt-5 text-muted-foreground">
               Property specialists, not generalists — built around the principle that focused
