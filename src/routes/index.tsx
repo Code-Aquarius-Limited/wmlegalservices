@@ -49,9 +49,6 @@ function HomePage() {
               <Link to="/contact" hash="quote" className="inline-flex items-center justify-center rounded-sm bg-bronze px-7 py-3.5 text-sm font-medium text-accent-foreground hover:opacity-90 transition-opacity">
                 Get a Quote
               </Link>
-              <Link to="/contact" hash="call" className="inline-flex items-center justify-center rounded-sm border border-primary-foreground/30 px-7 py-3.5 text-sm font-medium text-primary-foreground hover:bg-primary-foreground/10 transition-colors">
-                Book a Call
-              </Link>
               <Link to="/services" hash="partner-with-us" className="inline-flex items-center justify-center rounded-sm border border-primary-foreground/30 px-7 py-3.5 text-sm font-medium text-primary-foreground hover:bg-primary-foreground/10 transition-colors">
                 Partner With Us
               </Link>
