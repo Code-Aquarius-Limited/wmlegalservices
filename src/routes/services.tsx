@@ -1,4 +1,5 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useLocation } from "@tanstack/react-router";
+import { useEffect } from "react";
 import {
   Home, Building2, RefreshCw, FileSignature, KeyRound, HandCoins, ShieldCheck,
   Gavel, Users, Handshake, FileSearch, ListChecks, BadgeCheck,
