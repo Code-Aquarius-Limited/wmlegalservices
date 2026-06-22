@@ -28,12 +28,12 @@ export function Header() {
           : "bg-background/70 backdrop-blur-sm"
       }`}
     >
-      <div className="container-prose flex h-20 items-center justify-between gap-6">
+      <div className="container-prose flex h-28 items-center justify-between gap-6">
         <Link to="/" className="flex items-center gap-2 group" onClick={() => setOpen(false)}>
           <img
             src={logoAsset.url}
             alt="WM Legal Services"
-            className="h-10 w-auto object-contain"
+            className="h-20 w-auto object-contain"
           />
         </Link>
 
