@@ -1,13 +1,7 @@
 import { Link, useLocation, useNavigate } from "@tanstack/react-router";
-import { useEffect, useRef, useState, type MouseEvent } from "react";
+import { useEffect, useState, type MouseEvent } from "react";
 import { Menu, X, ChevronDown } from "lucide-react";
 import logoAsset from "@/assets/WM_Legal_Services_Logo.png.asset.json";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 
 const serviceLinks = [
   { to: "/services", hash: "conveyancing", label: "Conveyancing & Property Services" },
@@ -18,8 +12,6 @@ const serviceLinks = [
 export function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [servicesOpen, setServicesOpen] = useState(false);
-  const closeServicesTimer = useRef<number | null>(null);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -30,22 +22,6 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => {
-    return () => {
-      if (closeServicesTimer.current) window.clearTimeout(closeServicesTimer.current);
-    };
-  }, []);
-
-  const openServicesMenu = () => {
-    if (closeServicesTimer.current) window.clearTimeout(closeServicesTimer.current);
-    setServicesOpen(true);
-  };
-
-  const closeServicesMenu = () => {
-    if (closeServicesTimer.current) window.clearTimeout(closeServicesTimer.current);
-    closeServicesTimer.current = window.setTimeout(() => setServicesOpen(false), 120);
-  };
-
   const scrollToService = (hash: string) => {
     const el = document.getElementById(hash);
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -53,7 +29,6 @@ export function Header() {
 
   const handleServiceClick = async (event: MouseEvent<HTMLAnchorElement>, hash: string) => {
     event.preventDefault();
-    setServicesOpen(false);
     setOpen(false);
 
     if (location.pathname === "/services" && location.hash?.replace("#", "") === hash) {
@@ -92,37 +67,29 @@ export function Header() {
             Home
           </Link>
 
-          <div onMouseEnter={openServicesMenu} onMouseLeave={closeServicesMenu}>
-            <DropdownMenu open={servicesOpen} onOpenChange={setServicesOpen}>
-              <DropdownMenuTrigger
-                onFocus={openServicesMenu}
-                className="group inline-flex items-center gap-1 text-sm font-medium text-foreground/80 hover:text-primary transition-colors focus:outline-none data-[state=open]:text-primary"
-              >
-                Our Services
-                <ChevronDown
-                  size={14}
-                  className="shrink-0 transition-transform duration-200 group-data-[state=open]:rotate-180"
-                />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent
-                align="start"
-                onMouseEnter={openServicesMenu}
-                onMouseLeave={closeServicesMenu}
-                className="min-w-[16rem]"
-              >
-                {serviceLinks.map((s) => (
-                  <DropdownMenuItem key={s.hash} asChild>
-                    <a
-                      href={`${s.to}#${s.hash}`}
-                      onClick={(event) => handleServiceClick(event, s.hash)}
-                      className="cursor-pointer"
-                    >
-                      {s.label}
-                    </a>
-                  </DropdownMenuItem>
-                ))}
-              </DropdownMenuContent>
-            </DropdownMenu>
+          <div className="group relative">
+            <button
+              type="button"
+              className="inline-flex items-center gap-1 text-sm font-medium text-foreground/80 transition-colors hover:text-primary focus:text-primary focus:outline-none"
+            >
+              Our Services
+              <ChevronDown
+                size={14}
+                className="shrink-0 transition-transform duration-200 group-hover:rotate-180 group-focus-within:rotate-180"
+              />
+            </button>
+            <div className="invisible absolute left-0 top-full z-50 min-w-[16rem] rounded-md border bg-popover p-1 text-popover-foreground opacity-0 shadow-md transition-opacity duration-150 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
+              {serviceLinks.map((s) => (
+                <a
+                  key={s.hash}
+                  href={`${s.to}#${s.hash}`}
+                  onClick={(event) => handleServiceClick(event, s.hash)}
+                  className="block rounded-sm px-2 py-1.5 text-sm outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground"
+                >
+                  {s.label}
+                </a>
+              ))}
+            </div>
           </div>
 
           <Link
