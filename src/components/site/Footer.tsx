@@ -23,7 +23,7 @@ export function Footer() {
             aria-label="Instagram @1propertylawyer"
             className="mt-6 inline-flex items-center text-primary-foreground/80 hover:text-bronze transition-colors"
           >
-            <Instagram size={32} strokeWidth={1.5} />
+            <Instagram size={24} strokeWidth={1.5} />
           </a>
         </div>
 
