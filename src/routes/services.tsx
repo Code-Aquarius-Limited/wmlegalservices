@@ -1,4 +1,5 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useLocation } from "@tanstack/react-router";
+import { useEffect } from "react";
 import {
   Home, Building2, RefreshCw, FileSignature, KeyRound, HandCoins, ShieldCheck,
   Gavel, Users, Handshake, FileSearch, ListChecks, BadgeCheck,
@@ -27,6 +28,17 @@ const pillars = [
 ];
 
 function ServicesPage() {
+  const { hash } = useLocation();
+
+  useEffect(() => {
+    if (!hash) return;
+    const id = hash.replace("#", "");
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [hash]);
+
   return (
     <>
       {/* Header */}
