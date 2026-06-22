@@ -53,7 +53,7 @@ function ServicesPage() {
       <section className="bg-secondary border-b border-border">
         <div className="container-prose py-20 md:py-28">
           <span className="eyebrow">Our Services</span>
-          <h1 className="mt-5 text-5xl md:text-6xl max-w-3xl">Our services TEST</h1>
+          <h1 className="mt-5 text-5xl md:text-6xl max-w-3xl">Our services</h1>
           <p className="mt-5 max-w-2xl text-muted-foreground text-lg">
             Specialist property law expertise, from everyday conveyancing to complex auction
             transactions.
