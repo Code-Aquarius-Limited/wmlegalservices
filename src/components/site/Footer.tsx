@@ -1,19 +1,17 @@
 import { Link } from "@tanstack/react-router";
 import { Instagram, Mail, Phone, MapPin } from "lucide-react";
-import logoAsset from "@/assets/WM_Legal_Services_Logo.png.asset.json";
+import logoAsset from "@/assets/WM_Legal_Services_Logo_white.png.asset.json";
 
 export function Footer() {
   return (
     <footer className="bg-primary text-primary-foreground">
       <div className="container-prose py-16 grid gap-12 md:grid-cols-4">
         <div className="md:col-span-2 max-w-sm">
-          <div className="inline-block rounded bg-background p-2">
-            <img
-              src={logoAsset.url}
-              alt="WM Legal Services"
-              className="h-24 w-auto object-contain"
-            />
-          </div>
+          <img
+            src={logoAsset.url}
+            alt="WM Legal Services"
+            className="h-24 w-auto object-contain"
+          />
           <p className="mt-4 text-sm text-primary-foreground/70 leading-relaxed">
             Specialist property law team operating under Taylor Rose — one of the largest property
             law firms in the UK.
