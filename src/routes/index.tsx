@@ -253,6 +253,47 @@ function HomePage() {
         </div>
       </section>
 
+      {/* Team */}
+      <section id="team" className="py-20 md:py-28 scroll-mt-20">
+        <div className="container-prose">
+          <div className="max-w-2xl">
+            <span className="eyebrow">Our People</span>
+            <h2 className="mt-4 text-4xl md:text-5xl">Meet the team</h2>
+            <p className="mt-5 text-muted-foreground">
+              Property specialists, not generalists — built around the principle that focused
+              expertise produces better outcomes for clients.
+            </p>
+          </div>
+
+          {/* TODO: replace with real team photos and bios from Gabriel */}
+          <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {[
+              { n: "William Michael", r: "Partner at Taylor Rose · CEO, WM Legal Services", e: "Auction conveyancing · Investor transactions · Strategy" },
+              { n: "Senior Conveyancer", r: "Residential Property", e: "Sales, purchases, new build, lease extensions" },
+              { n: "Senior Conveyancer", r: "Commercial Property", e: "Commercial sales & purchases, BSA matters" },
+              { n: "Auction Team Lead", r: "Auction Conveyancing", e: "Legal pack reviews, auction completions" },
+              { n: "Panel Manager", r: "Panel Management", e: "Introducer relationships, escalations, reporting" },
+              { n: "Client Care", r: "Client Services", e: "Quotes, onboarding, communication" },
+            ].map((p, idx) => (
+              <article key={idx} className="bg-card border border-border rounded-md overflow-hidden">
+                <div className="aspect-[4/3] bg-gradient-to-br from-secondary to-border grid place-items-center">
+                  <UserSquare2 size={56} strokeWidth={0.8} className="text-primary/30" />
+                </div>
+                <div className="p-6">
+                  <h3 className="text-lg font-medium text-primary">{p.n}</h3>
+                  <div className="mt-1 text-xs uppercase tracking-wider text-bronze">{p.r}</div>
+                  <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{p.e}</p>
+                  <a href="mailto:enquiries@wmlegalservices.co.uk"
+                    className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-primary hover:text-bronze transition-colors">
+                    Contact →
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <CTABanner />
     </>
   );
