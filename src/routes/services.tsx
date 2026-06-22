@@ -255,7 +255,7 @@ function ServicesPage() {
       <section id="team" className="py-20 md:py-28 scroll-mt-20">
         <div className="container-prose">
           <div className="max-w-2xl">
-            <span className="eyebrow">Pillar 05</span>
+            <span className="eyebrow">Our People</span>
             <h2 className="mt-4 text-4xl md:text-5xl">Meet the team</h2>
             <p className="mt-5 text-muted-foreground">
               Property specialists, not generalists — built around the principle that focused
