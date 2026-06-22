@@ -42,9 +42,9 @@ function ContactPage() {
                   <Phone size={16} className="mt-0.5 text-bronze shrink-0" />
                   <div>
                     <div className="text-xs uppercase tracking-wider text-muted-foreground">Phone</div>
-                    {/* TODO: insert real office phone number */}
-                    <a href="tel:+442000000000" className="font-medium text-foreground hover:text-bronze">
-                      020 0000 0000
+                    <a href="tel:+442032920669" className="font-medium text-foreground hover:text-bronze">
+                      020 3292 0669
+
                     </a>
                   </div>
                 </li>
