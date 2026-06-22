@@ -40,10 +40,11 @@ export function EnquiryForm({
     const name = String(fd.get("name") || "").trim();
     const email = String(fd.get("email") || "").trim();
     const phone = String(fd.get("phone") || "").trim();
+    const scheduleCall = String(fd.get("scheduleCall") || "").trim();
     const message = String(fd.get("message") || "").trim();
     const subject = encodeURIComponent(SUBJECTS[type]);
     const body = encodeURIComponent(
-      `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nEnquiry type: ${type}\n\nMessage:\n${message}`,
+      `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nSchedule a call: ${scheduleCall || "Not requested"}\nEnquiry type: ${type}\n\nMessage:\n${message}`,
     );
     // TODO: replace with Formspree / Cloud function submission to enquiries@wmlegalservices.co.uk
     window.location.href = `mailto:enquiries@wmlegalservices.co.uk?subject=${subject}&body=${body}`;
