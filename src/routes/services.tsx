@@ -32,18 +32,21 @@ function ServicesPage() {
 
   useEffect(() => {
     const targetHash = hash || window.location.hash;
-    console.log("hash effect:", hash, "window.hash:", window.location.hash, "target:", targetHash);
     if (!targetHash) return;
     const id = targetHash.replace("#", "");
-    const scrollToId = () => {
+
+    const scrollToSection = () => {
       const el = document.getElementById(id);
-      console.log("found element:", id, el);
       if (el) {
         el.scrollIntoView({ behavior: "smooth", block: "start" });
       }
     };
-    scrollToId();
-    const timer = setTimeout(scrollToId, 200);
+
+    // Scroll immediately, then again after a short delay so the scroll
+    // isn't cancelled by the router's own scroll restoration on client-side
+    // navigation from the header dropdown.
+    scrollToSection();
+    const timer = setTimeout(scrollToSection, 120);
     return () => clearTimeout(timer);
   }, [hash]);
 
