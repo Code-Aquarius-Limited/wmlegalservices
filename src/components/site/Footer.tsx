@@ -31,8 +31,8 @@ export function Footer() {
           <ul className="mt-5 space-y-3 text-sm text-primary-foreground/80">
             <li className="flex items-start gap-3">
               <Phone size={14} className="mt-1 shrink-0" />
-              {/* TODO: insert real office phone number */}
-              <span>020 0000 0000</span>
+              <span>020 3292 0669</span>
+
             </li>
             <li className="flex items-start gap-3">
               <Mail size={14} className="mt-1 shrink-0" />
