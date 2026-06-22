@@ -255,51 +255,6 @@ function ServicesPage() {
         </div>
       </section>
 
-      {/* Partner */}
-      <section id="partner-with-us" className="bg-secondary py-20 md:py-28 scroll-mt-20">
-        <div className="container-prose">
-          <div className="max-w-2xl">
-            <span className="eyebrow">Pillar 04</span>
-            <h2 className="mt-4 text-4xl md:text-5xl">Partner with us</h2>
-            <p className="mt-5 text-muted-foreground">
-              Built for estate agents, mortgage brokers and introducers who want their clients
-              treated as carefully as their own brand demands.
-            </p>
-          </div>
-          <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-            {[
-              { t: "No sale, no fee", d: "Aligned incentives — we only get paid when your client completes." },
-              { t: "Low fall-through", d: "A 9.2% fall-through rate vs. an industry average well over double." },
-              { t: "Communication standards", d: "Defined SLAs on response times and pipeline updates." },
-              { t: "Real partnership", d: "A dedicated relationship contact, not a faceless inbox." },
-            ].map(({ t, d }) => (
-              <div key={t} className="bg-card border border-border rounded-md p-6">
-                <h3 className="text-base font-medium text-primary">{t}</h3>
-                <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{d}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* Introducer testimonial */}
-          <div className="mt-12 rounded-md border-l-2 border-bronze bg-card p-8 md:p-10">
-            <div className="eyebrow">Introducer testimonial</div>
-            <blockquote className="mt-4 font-serif text-2xl text-primary leading-snug max-w-3xl">
-              "WM have genuinely raised the bar for our clients. Their fall-through rate is exceptional and
-              the communication is the best we've worked with."
-            </blockquote>
-            <div className="mt-5 text-sm text-muted-foreground">
-              Director, Independent Estate Agency · London
-            </div>
-          </div>
-
-          <div className="mt-10">
-            <Link to="/contact" hash="partner"
-              className="inline-flex items-center gap-2 rounded-sm bg-primary px-6 py-3 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors">
-              Become a Partner →
-            </Link>
-          </div>
-        </div>
-      </section>
 
       {/* Team */}
       <section id="team" className="py-20 md:py-28 scroll-mt-20">
