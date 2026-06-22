@@ -9,12 +9,6 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-const nav = [
-  { to: "/", label: "Home" },
-  { to: "/services", label: "Our Services" },
-  { to: "/contact", label: "Contact Us" },
-] as const;
-
 const serviceLinks = [
   { to: "/services", hash: "conveyancing", label: "Conveyancing & Property Services" },
   { to: "/services", hash: "auctions", label: "Auction Conveyancing Specialists" },
