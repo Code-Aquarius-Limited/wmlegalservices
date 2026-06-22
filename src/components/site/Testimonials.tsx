@@ -1,4 +1,11 @@
 import { Star } from "lucide-react";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 export interface Review {
   name: string;
@@ -35,6 +42,29 @@ const defaultReviews: Review[] = [
   },
 ];
 
+function ReviewCard({ review }: { review: Review }) {
+  return (
+    <article className="bg-card border border-border rounded-md p-6 shadow-[var(--shadow-soft)] flex flex-col h-full">
+      <div className="flex items-center gap-3">
+        <div className="h-10 w-10 rounded-full bg-primary text-primary-foreground grid place-items-center font-serif">
+          {review.initial}
+        </div>
+        <div>
+          <div className="text-sm font-medium text-foreground">{review.name}</div>
+          <div className="text-xs text-muted-foreground">{review.date}</div>
+        </div>
+      </div>
+      <div className="mt-4 flex items-center gap-0.5">
+        {Array.from({ length: review.rating ?? 5 }).map((_, k) => (
+          <Star key={k} size={14} className="text-bronze" fill="currentColor" strokeWidth={0} />
+        ))}
+      </div>
+      <p className="mt-4 text-sm text-foreground/80 leading-relaxed flex-1">{review.body}</p>
+      <div className="mt-5 text-xs text-muted-foreground">Posted on Google</div>
+    </article>
+  );
+}
+
 export function Testimonials({ reviews = defaultReviews }: { reviews?: Review[] }) {
   return (
     <section className="bg-secondary py-20 md:py-28">
@@ -47,31 +77,34 @@ export function Testimonials({ reviews = defaultReviews }: { reviews?: Review[] 
           </p>
         </div>
 
-        {/* TODO: replace with live Google Reviews embed */}
-        <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        {/* Desktop grid */}
+        <div className="mt-12 hidden gap-6 md:grid md:grid-cols-2 lg:grid-cols-4">
           {reviews.map((r, i) => (
-            <article
-              key={i}
-              className="bg-card border border-border rounded-md p-6 shadow-[var(--shadow-soft)] flex flex-col"
-            >
-              <div className="flex items-center gap-3">
-                <div className="h-10 w-10 rounded-full bg-primary text-primary-foreground grid place-items-center font-serif">
-                  {r.initial}
-                </div>
-                <div>
-                  <div className="text-sm font-medium text-foreground">{r.name}</div>
-                  <div className="text-xs text-muted-foreground">{r.date}</div>
-                </div>
-              </div>
-              <div className="mt-4 flex items-center gap-0.5">
-                {Array.from({ length: r.rating ?? 5 }).map((_, k) => (
-                  <Star key={k} size={14} className="text-bronze" fill="currentColor" strokeWidth={0} />
-                ))}
-              </div>
-              <p className="mt-4 text-sm text-foreground/80 leading-relaxed flex-1">{r.body}</p>
-              <div className="mt-5 text-xs text-muted-foreground">Posted on Google</div>
-            </article>
+            <ReviewCard key={i} review={r} />
           ))}
+        </div>
+
+        {/* Mobile carousel */}
+        <div className="mt-12 md:hidden">
+          <Carousel
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            className="w-full"
+          >
+            <CarouselContent className="-ml-4">
+              {reviews.map((r, i) => (
+                <CarouselItem key={i} className="pl-4 basis-[85%] sm:basis-[75%]">
+                  <ReviewCard review={r} />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <div className="mt-6 flex items-center justify-center gap-4">
+              <CarouselPrevious className="relative left-0 top-0 translate-x-0 translate-y-0" />
+              <CarouselNext className="relative right-0 top-0 translate-x-0 translate-y-0" />
+            </div>
+          </Carousel>
         </div>
 
         <div className="mt-10 flex items-center gap-4">
