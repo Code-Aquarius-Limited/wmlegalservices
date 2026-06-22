@@ -85,6 +85,15 @@ export function EnquiryForm({
       </div>
 
       <div className="mt-4 flex flex-col">
+        <label className="text-xs font-medium text-foreground/80 mb-1.5">Schedule a call</label>
+        <input
+          type="date"
+          name="scheduleCall"
+          className="h-11 rounded-sm border border-input bg-background px-3 text-sm focus:outline-none focus:ring-2 focus:ring-ring/40 md:w-1/2"
+        />
+      </div>
+
+      <div className="mt-4 flex flex-col">
         <label className="text-xs font-medium text-foreground/80 mb-1.5">Message</label>
         <textarea
           name="message"
