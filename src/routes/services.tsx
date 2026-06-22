@@ -28,6 +28,7 @@ const pillars = [
 ];
 
 function ServicesPage() {
+  console.log("ServicesPage render");
   const { hash } = useLocation();
 
   useEffect(() => {
