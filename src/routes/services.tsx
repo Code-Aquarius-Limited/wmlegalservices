@@ -176,6 +176,22 @@ function ServicesPage() {
             body="Legal pack preparation, fast instruction processes and direct coordination with your chosen auction house — so your lot is ready to sell on the catalogue deadline."
           />
 
+          <div className="mt-8 grid gap-4 md:grid-cols-3 lg:grid-cols-5">
+            {[
+              "Instruct your solicitor early",
+              "Prepare the legal pack",
+              "Set the guide price and reserve",
+              "Exchange on the fall of the hammer",
+              "Complete within the auction timescale",
+            ].map((step, idx) => (
+              <div key={step} className="rounded-md border border-primary-foreground/15 bg-primary-foreground/5 p-6">
+                <div className="font-serif text-2xl text-bronze">{String(idx + 1).padStart(2, "0")}</div>
+                <p className="mt-3 text-sm text-primary-foreground/80 leading-relaxed">{step}</p>
+              </div>
+            ))}
+          </div>
+
+
           {/* Investor */}
           <div className="mt-14">
             <h3 className="text-2xl text-primary-foreground">Investor &amp; Developer Services</h3>
