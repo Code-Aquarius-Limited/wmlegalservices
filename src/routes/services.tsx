@@ -146,7 +146,7 @@ function ServicesPage() {
               icon={FileSearch}
               title="Auction Legal Pack Reviews"
               body="Fast turnaround (often within 48 hours), fixed-fee packages, and a plain-English summary that highlights risks, title issues, lease terms, special conditions, and any other points worth knowing before you bid."
-              cta={{ to: "/contact", hash: "legal-pack", label: "Request a Legal Pack Review" }}
+              cta={{ to: "/contact", hash: "quote", label: "Request a Legal Pack Review" }}
             />
 
             <ol className="mt-8 grid md:grid-cols-5 gap-4">
@@ -177,7 +177,7 @@ function ServicesPage() {
               icon={ListChecks}
               title="Legal Pack &amp; Auction Listing Preparation"
               body="Legal pack preparation, fast instruction processes and direct coordination with your chosen auction house — so your lot is ready to sell on the catalogue deadline."
-              cta={{ to: "/contact", hash: "preparation-pack", label: "Request an auction legal pack" }}
+              cta={{ to: "/contact", hash: "quote", label: "Request an auction legal pack" }}
             />
 
             <div className="mt-8 grid gap-4 md:grid-cols-3 lg:grid-cols-5">
