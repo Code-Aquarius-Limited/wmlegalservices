@@ -137,17 +137,18 @@ function ServicesPage() {
             </p>
           </div>
 
-          {/* Legal Pack Reviews */}
-          <SpotBlock
-            icon={FileSearch}
-            title="Auction Legal Pack Reviews"
-            body="Fast turnaround (often within 48 hours), fixed-fee packages, and a plain-English summary that highlights risks, title issues, lease terms, special conditions, and any other points worth knowing before you bid."
-            cta={{ to: "/contact", hash: "legal-pack", label: "Request a Legal Pack Review" }}
-          />
-
           {/* Buying at Auction */}
           <div className="mt-14">
             <h3 className="text-2xl text-primary-foreground">Buying at Auction</h3>
+
+            {/* Legal Pack Reviews */}
+            <SpotBlock
+              icon={FileSearch}
+              title="Auction Legal Pack Reviews"
+              body="Fast turnaround (often within 48 hours), fixed-fee packages, and a plain-English summary that highlights risks, title issues, lease terms, special conditions, and any other points worth knowing before you bid."
+              cta={{ to: "/contact", hash: "legal-pack", label: "Request a Legal Pack Review" }}
+            />
+
             <ol className="mt-8 grid md:grid-cols-5 gap-4">
               {[
                 "Get the legal pack reviewed",
