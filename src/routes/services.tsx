@@ -307,7 +307,7 @@ function SpotBlock({
         <h3 className="text-2xl text-primary-foreground">{title}</h3>
         <p className="mt-3 text-primary-foreground/80 leading-relaxed max-w-3xl">{body}</p>
         {cta && (
-          <Link to={cta.to} hash={cta.hash}
+          <Link to={cta.to} {...(cta.hash ? { hash: cta.hash } : {})}
             className="mt-5 inline-flex items-center gap-2 rounded-sm bg-bronze px-5 py-2.5 text-sm font-medium text-accent-foreground hover:opacity-90 transition-opacity">
             {cta.label} →
           </Link>
