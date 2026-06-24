@@ -19,8 +19,7 @@ export function CTABanner({
             Get a Quote
           </Link>
           <Link
-            to="/services"
-            hash="partner-with-us"
+            to="/contact"
             className="inline-flex items-center justify-center rounded-sm border border-primary-foreground/30 bg-transparent px-7 py-3.5 text-sm font-medium text-primary-foreground hover:bg-primary-foreground/10 transition-colors"
           >
             Partner With Us
