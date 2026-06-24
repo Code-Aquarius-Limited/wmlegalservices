@@ -169,12 +169,24 @@ function ServicesPage() {
             </div>
           </div>
 
-          {/* Selling */}
-          <SpotBlock
-            icon={ListChecks}
-            title="Selling at Auction"
-            body="Legal pack preparation, fast instruction processes and direct coordination with your chosen auction house — so your lot is ready to sell on the catalogue deadline."
-          />
+          {/* Selling at Auction */}
+          <div className="mt-14">
+            <h3 className="text-2xl text-primary-foreground">Selling at Auction</h3>
+            <ol className="mt-8 grid md:grid-cols-5 gap-4">
+              {[
+                "Instruct your solicitor early",
+                "Prepare the legal pack",
+                "Set the guide price and reserve",
+                "Exchange on the fall of the hammer",
+                "Complete within the auction timescale",
+              ].map((step, idx) => (
+                <li key={step} className="rounded-md border border-primary-foreground/15 bg-primary-foreground/5 p-5">
+                  <div className="font-serif text-2xl text-bronze">{String(idx + 1).padStart(2, "0")}</div>
+                  <p className="mt-3 text-sm text-primary-foreground/80 leading-relaxed">{step}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
 
           {/* Investor */}
           <div className="mt-14">
