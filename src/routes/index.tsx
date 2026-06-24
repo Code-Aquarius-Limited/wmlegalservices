@@ -60,7 +60,7 @@ function HomePage() {
       {/* Stats */}
       <StatsBar
         stats={[
-          { icon: Shield, number: "No Sale,", label: "No Fee" },
+          { icon: Shield, number: "Regulated & Insured", label: "Fully SRA authorised" },
           { icon: TrendingDown, number: "9.2%", label: "Fall-through rate" },
           { icon: CheckCircle2, number: "1000s", label: "Transactions completed" },
           { icon: Briefcase, number: "Specialist", label: "Property law team" },
@@ -220,7 +220,7 @@ function HomePage() {
           </div>
           <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
             {[
-              { t: "No sale, no fee", d: "Aligned incentives — we only get paid when your client completes." },
+              { t: "Regulated & Insured", d: "Fully SRA authorised" },
               { t: "Low fall-through", d: "A 9.2% fall-through rate vs. an industry average well over double." },
               { t: "Communication standards", d: "Defined SLAs on response times and pipeline updates." },
               { t: "Real partnership", d: "A dedicated relationship contact, not a faceless inbox." },
