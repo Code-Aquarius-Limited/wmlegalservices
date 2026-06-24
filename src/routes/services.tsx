@@ -254,7 +254,7 @@ function ServicesPage() {
                 </p>
               </div>
             </div>
-            <Link to="/contact" hash="callback"
+            <Link to="/contact"
               className="inline-flex items-center justify-center rounded-sm bg-bronze px-6 py-3 text-sm font-medium text-accent-foreground hover:opacity-90 transition-opacity">
               Request a Call Back
             </Link>
