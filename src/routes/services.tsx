@@ -177,7 +177,7 @@ function ServicesPage() {
               icon={ListChecks}
               title="Legal Pack &amp; Auction Listing Preparation"
               body="Legal pack preparation, fast instruction processes and direct coordination with your chosen auction house — so your lot is ready to sell on the catalogue deadline."
-              cta={{ to: "/contact", hash: "preparation-pack", label: "Request a preparation pack" }}
+              cta={{ to: "/contact", hash: "preparation-pack", label: "Request an auction legal pack" }}
             />
 
             <div className="mt-8 grid gap-4 md:grid-cols-3 lg:grid-cols-5">
