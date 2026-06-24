@@ -221,7 +221,7 @@ function ServicesPage() {
             icon={Handshake}
             title="Auction House Partnerships"
             body="Service standards, fast turnaround times, dedicated points of contact, capacity for volume instructions, and the ability to work consistently to tight auction deadlines."
-            cta={{ to: "/contact", hash: "partner", label: "Partner With Us" }}
+            cta={{ to: "/contact", label: "Partner With Us" }}
           />
 
           {/* Downloads */}
