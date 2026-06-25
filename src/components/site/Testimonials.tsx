@@ -23,10 +23,10 @@ const defaultReviews: Review[] = [
     body: "We used Taylor Rose for our flat purchase. Aliyah Saddique was fantastic - very responsive and kept us updated at each stage. Her work was done to a high standard and we felt our interests were safe in her care. The fees were reasonable and the conveyancing process was smooth.",
   },
   {
-    name: "Michael R.",
-    initial: "M",
+    name: "Ramona Fernandes",
+    initial: "R",
     date: "1 month ago",
-    body: "We bought at auction and needed a fast legal pack review. WM Legal Services turned it around in 48 hours with a clear, plain-English summary. Brilliant.",
+    body: "Narin was so sweet, preemptive and litigious. Her knowledge and expertise on the legal matters really shows, taking the time to advise over the steps. So grateful to have her with me through the process.",
   },
   {
     name: "Priya K.",
