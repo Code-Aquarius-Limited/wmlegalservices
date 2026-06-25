@@ -32,7 +32,7 @@ const defaultReviews: Review[] = [
     name: "Julia Michasiewicz",
     initial: "J",
     date: "1 month ago",
-    body: "I would like to provide feedback on the solicitor who handled the purchase of my flat in Bilston. Overall, I am very happy with the service provided. Aliyah Saddique was consistently professional throughout the process and demonstrated a strong level of competence and attention to detail. She was always responsive and answered my queries promptly, which helped make what can often be a stressful process feel much more manageable. Communication was clear and efficient, and I felt well-informed at each stage of the transaction. Any questions or concerns I raised were dealt with quickly and thoroughly, which gave me confidence that everything was being handled properly. Overall, I am very satisfied with the service received and would be happy to recommend her to others.",
+    body: "I would like to provide feedback on the solicitor who handled the purchase of my flat in Bilston. Overall, I am very happy with the service provided. Aliyah Saddique was consistently professional throughout the process and demonstrated a strong level of competence and attention to detail.",
   },
   {
     name: "James W.",
