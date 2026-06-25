@@ -35,10 +35,10 @@ const defaultReviews: Review[] = [
     body: "I would like to provide feedback on the solicitor who handled the purchase of my flat in Bilston. Overall, I am very happy with the service provided. Aliyah Saddique was consistently professional throughout the process and demonstrated a strong level of competence and attention to detail.",
   },
   {
-    name: "James W.",
-    initial: "J",
+    name: "Aymeric Regnier",
+    initial: "A",
     date: "2 months ago",
-    body: "Sold our home with no hassle. Knowledgeable, responsive, and they actually picked up the phone — rare these days.",
+    body: "Aliyah Saddique and Sara Tenn from Taylor Rose were of great help in my legal process and very responsive to any queries I had. Great service, would recommend.",
   },
 ];
 
