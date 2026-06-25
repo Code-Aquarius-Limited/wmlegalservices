@@ -51,7 +51,6 @@ function ReviewCard({ review }: { review: Review }) {
         </div>
         <div>
           <div className="text-sm font-medium text-foreground">{review.name}</div>
-          <div className="text-xs text-muted-foreground">{review.date}</div>
         </div>
       </div>
       <div className="mt-4 flex items-center gap-0.5">
