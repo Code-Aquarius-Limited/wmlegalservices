@@ -82,7 +82,7 @@ function ContactPage() {
                     Auction enquiries
                   </span>
                 </Link>
-                <Link to="/services" hash="partner-with-us"
+                <Link to="/" hash="partner-with-us"
                   className="group flex items-center gap-3 p-3 rounded-sm border border-border hover:border-bronze transition-colors">
                   <Handshake size={18} className="text-bronze" strokeWidth={1.5} />
                   <span className="text-sm font-medium text-foreground group-hover:text-primary">
