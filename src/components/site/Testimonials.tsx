@@ -17,10 +17,10 @@ export interface Review {
 
 const defaultReviews: Review[] = [
   {
-    name: "Sarah J.",
-    initial: "S",
+    name: "Nicholas Cheung",
+    initial: "N",
     date: "2 weeks ago",
-    body: "Outstanding service from start to finish. The team kept us informed at every stage and made what could have been a stressful purchase remarkably smooth.",
+    body: "We used Taylor Rose for our flat purchase. Aliyah Saddique was fantastic - very responsive and kept us updated at each stage. Her work was done to a high standard and we felt our interests were safe in her care. The fees were reasonable and the conveyancing process was smooth.",
   },
   {
     name: "Michael R.",
