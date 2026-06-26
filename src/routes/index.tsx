@@ -60,7 +60,6 @@ function HomePage() {
       {/* Stats */}
       <StatsBar
         stats={[
-          { icon: Shield, number: "Regulated & Insured", label: "Fully SRA authorised" },
           { icon: TrendingDown, number: "9.2%", label: "Fall-through rate" },
           { icon: CheckCircle2, number: "1000s", label: "Transactions completed" },
           { icon: Briefcase, number: "Specialist", label: "Property law team" },
