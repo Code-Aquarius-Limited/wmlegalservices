@@ -217,9 +217,8 @@ function HomePage() {
               treated as carefully as their own brand demands.
             </p>
           </div>
-          <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {[
-              { t: "Regulated & Insured", d: "Fully SRA authorised" },
               { t: "Low fall-through", d: "A 9.2% fall-through rate vs. an industry average well over double." },
               { t: "Communication standards", d: "Defined SLAs on response times and pipeline updates." },
               { t: "Real partnership", d: "A dedicated relationship contact, not a faceless inbox." },
