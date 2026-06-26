@@ -62,7 +62,7 @@ export function Footer() {
       </div>
       <div className="border-t border-primary-foreground/10">
         <div className="container-prose py-6 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-primary-foreground/60">
-          <p>© {new Date().getFullYear()} WM Legal Services. Operating under Taylor Rose.</p>
+          <p>© {new Date().getFullYear()} WM Legal Services.&nbsp;</p>
         </div>
       </div>
     </footer>
