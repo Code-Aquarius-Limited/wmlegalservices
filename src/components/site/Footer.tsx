@@ -13,7 +13,7 @@ export function Footer() {
             className="h-24 w-auto object-contain"
           />
           <p className="mt-4 text-sm text-primary-foreground/70 leading-relaxed">
-            Specialist property law team <strong>condensing services provided under Taylor Rose Solicitors Limited</strong>, who are authorised & regulated by the Solicitors Regulatory Authority.
+            Specialist property law team <strong>**condensing services provided under Taylor Rose Solicitors Limited**</strong>, who are authorised & regulated by the Solicitors Regulatory Authority.
           </p>
           <a
             href="https://instagram.com/1propertylawyer"
