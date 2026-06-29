@@ -6,6 +6,7 @@ import {
 import heroImg from "@/assets/hero.jpg";
 import propertyImg from "@/assets/property.jpg";
 import auctionImg from "@/assets/auction.jpg";
+import meetTheTeamVideo from "@/assets/Meet_The_Team.mov.asset.json";
 import { StatsBar } from "@/components/site/StatsBar";
 import { Testimonials } from "@/components/site/Testimonials";
 import { CTABanner } from "@/components/site/CTABanner";
@@ -132,16 +133,14 @@ function HomePage() {
               specialist property expertise matters more than ever.
             </p>
           </div>
-          <div className="relative aspect-video rounded-md overflow-hidden bg-primary group cursor-pointer">
-            {/* TODO: embed introduction video from William Michael */}
-            <img src={propertyImg} alt="Introduction video placeholder"
-              loading="lazy" width={1280} height={832}
-              className="absolute inset-0 h-full w-full object-cover opacity-60 group-hover:opacity-70 transition-opacity" />
-            <div className="absolute inset-0 grid place-items-center">
-              <div className="h-20 w-20 rounded-full bg-bronze grid place-items-center shadow-[var(--shadow-card)] group-hover:scale-105 transition-transform">
-                <Play size={28} className="text-accent-foreground ml-1" fill="currentColor" />
-              </div>
-            </div>
+          <div className="relative aspect-video rounded-md overflow-hidden bg-primary shadow-[var(--shadow-card)]">
+            <video
+              src={meetTheTeamVideo.url}
+              controls
+              playsInline
+              className="absolute inset-0 h-full w-full object-cover"
+              poster={propertyImg}
+            />
           </div>
         </div>
       </section>
