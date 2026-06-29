@@ -86,8 +86,34 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
     ],
     scripts: [
-      // TODO: insert GA4 measurement ID
-      // { src: "https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX", async: true },
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": [
+            {
+              "@type": "WebSite",
+              "@id": "https://wmlegalservices.co.uk/#website",
+              url: "https://wmlegalservices.co.uk",
+              name: "WM Legal Services",
+              description: "Specialist property law team based in London. Conveyancing, auction conveyancing, panel management and partner services.",
+            },
+            {
+              "@type": "Organization",
+              "@id": "https://wmlegalservices.co.uk/#organization",
+              name: "WM Legal Services",
+              url: "https://wmlegalservices.co.uk",
+              logo: "https://storage.googleapis.com/gpt-engineer-file-uploads/hVwWIy58G2ZiNS1DGn6qNrbja4y2/social-images/social-1782143284675-WM_Legal_Services_Social_Image.webp",
+              contactPoint: {
+                "@type": "ContactPoint",
+                telephone: "+44-20-3292-0669",
+                contactType: "customer service",
+                email: "enquiries@wmlegalservices.co.uk",
+              },
+            },
+          ],
+        }),
+      },
     ],
   }),
   shellComponent: RootShell,
