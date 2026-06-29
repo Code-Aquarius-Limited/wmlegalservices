@@ -278,7 +278,7 @@ function HomePage() {
           </div>
 
           {/* TODO: replace with real team photos and bios from Gabriel */}
-          <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-12 hidden grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {[
               { n: "William Michael", r: "Partner at Taylor Rose · CEO, WM Legal Services", e: "Auction conveyancing · Investor transactions · Strategy" },
               { n: "Senior Conveyancer", r: "Residential Property", e: "Sales, purchases, new build, lease extensions" },
