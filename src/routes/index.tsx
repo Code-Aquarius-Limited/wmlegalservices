@@ -6,7 +6,7 @@ import {
 import heroImg from "@/assets/hero.jpg";
 import propertyImg from "@/assets/property.jpg";
 import auctionImg from "@/assets/auction.jpg";
-import meetTheTeamVideo from "@/assets/Meet_The_Team.mov.asset.json";
+import meetWilliamMichaelVideo from "@/assets/Meet_William_Michael.mov.asset.json";
 import { StatsBar } from "@/components/site/StatsBar";
 import { Testimonials } from "@/components/site/Testimonials";
 import { CTABanner } from "@/components/site/CTABanner";
@@ -135,7 +135,7 @@ function HomePage() {
           </div>
           <div className="relative aspect-video rounded-md overflow-hidden bg-primary shadow-[var(--shadow-card)]">
             <video
-              src={meetTheTeamVideo.url}
+              src={meetWilliamMichaelVideo.url}
               controls
               playsInline
               className="absolute inset-0 h-full w-full object-cover"
