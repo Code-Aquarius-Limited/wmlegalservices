@@ -1,4 +1,7 @@
 import { useState, type FormEvent } from "react";
+import { useServerFn } from "@tanstack/react-start";
+import { toast } from "sonner";
+import { sendEnquiryEmail } from "@/lib/enquiry.functions";
 
 export type FormType = "general" | "quote" | "auction legal pack" | "auction callback" | "partner";
 
@@ -31,24 +34,41 @@ export function EnquiryForm({
   compact = false,
   title,
 }: Props) {
-  const [sent, setSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const [type, setType] = useState<FormType>(formType);
+  const sendEmailFn = useServerFn(sendEnquiryEmail);
 
-  const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const fd = new FormData(e.currentTarget);
+    const form = e.currentTarget;
+    const fd = new FormData(form);
     const name = String(fd.get("name") || "").trim();
     const email = String(fd.get("email") || "").trim();
     const phone = String(fd.get("phone") || "").trim();
     const scheduleCall = String(fd.get("scheduleCall") || "").trim();
     const message = String(fd.get("message") || "").trim();
-    const subject = encodeURIComponent(SUBJECTS[type]);
-    const body = encodeURIComponent(
-      `Name: ${name}\nEmail: ${email}\nPhone: ${phone}\nDiscovery call date: ${scheduleCall || "Not requested"}\nEnquiry type: ${type}\n\nMessage:\n${message}`,
-    );
-    // TODO: replace with Formspree / Cloud function submission to enquiries@wmlegalservices.co.uk
-    window.location.href = `mailto:enquiries@wmlegalservices.co.uk?subject=${subject}&body=${body}`;
-    setSent(true);
+
+    try {
+      setSubmitting(true);
+      await sendEmailFn({
+        data: {
+          name,
+          email,
+          phone,
+          scheduleCall,
+          type,
+          message,
+          subject: SUBJECTS[type],
+        },
+      });
+      toast.success("Your email has been sent!");
+      form.reset();
+    } catch (err) {
+      console.error("Failed to submit enquiry:", err);
+      toast.error("Failed to send message. Please try again or email us directly.");
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -106,9 +126,10 @@ export function EnquiryForm({
 
       <button
         type="submit"
-        className="mt-6 inline-flex items-center justify-center rounded-sm bg-primary px-6 py-3 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
+        disabled={submitting}
+        className="mt-6 inline-flex items-center justify-center rounded-sm bg-primary px-6 py-3 text-sm font-medium text-primary-foreground hover:bg-primary/90 disabled:opacity-50 transition-colors"
       >
-        {sent ? "Opening your email…" : "Send enquiry"}
+        {submitting ? "Sending…" : "Send enquiry"}
       </button>
       <p className="mt-4 text-xs text-muted-foreground">
         By submitting, you agree to be contacted regarding your enquiry. We never share your details.
