@@ -7,6 +7,7 @@ import heroImg from "@/assets/hero.jpg";
 import propertyImg from "@/assets/property.jpg";
 import auctionImg from "@/assets/auction.jpg";
 import meetWilliamMichaelVideo from "@/assets/Meet_William_Michael.mov.asset.json";
+import meetWilliamMichaelPoster from "@/assets/meet_william_michael_poster.png.asset.json";
 import { StatsBar } from "@/components/site/StatsBar";
 import { Testimonials } from "@/components/site/Testimonials";
 import { CTABanner } from "@/components/site/CTABanner";
@@ -139,7 +140,7 @@ function HomePage() {
               controls
               playsInline
               className="absolute inset-0 h-full w-full object-cover"
-              poster={propertyImg}
+              poster={meetWilliamMichaelPoster.url}
             />
           </div>
         </div>
