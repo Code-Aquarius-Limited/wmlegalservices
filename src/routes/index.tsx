@@ -8,6 +8,7 @@ import propertyImg from "@/assets/property.jpg";
 import auctionImg from "@/assets/auction.jpg";
 import meetWilliamMichaelVideo from "@/assets/Meet_William_Michael.mov.asset.json";
 import meetWilliamMichaelPoster from "@/assets/meet_william_michael_poster.png.asset.json";
+import meetTheTeamSectionVideo from "@/assets/Meet_The_Team_2.mov.asset.json";
 import { StatsBar } from "@/components/site/StatsBar";
 import { Testimonials } from "@/components/site/Testimonials";
 import { CTABanner } from "@/components/site/CTABanner";
@@ -261,6 +262,17 @@ function HomePage() {
               Property specialists, not generalists — built around the principle that focused
               expertise produces better outcomes for clients.
             </p>
+          </div>
+
+          <div className="mt-8 w-full lg:w-1/2">
+            <div className="relative aspect-video rounded-md overflow-hidden bg-primary shadow-[var(--shadow-card)]">
+              <video
+                src={meetTheTeamSectionVideo.url}
+                controls
+                playsInline
+                className="absolute inset-0 h-full w-full object-cover"
+              />
+            </div>
           </div>
 
           {/* TODO: replace with real team photos and bios from Gabriel */}
