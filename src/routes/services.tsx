@@ -17,6 +17,51 @@ export const Route = createFileRoute("/services")({
       { property: "og:title", content: "Our Services — WM Legal Services" },
       { property: "og:description", content: "Specialist property law expertise, from everyday conveyancing to complex auction transactions." },
     ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Service",
+          serviceType: "Property Law & Conveyancing Services",
+          provider: {
+            "@type": "LegalService",
+            name: "WM Legal Services",
+            url: "https://wmlegalservices.co.uk",
+          },
+          hasOfferCatalog: {
+            "@type": "OfferCatalog",
+            name: "Property Law Services",
+            itemListElement: [
+              {
+                "@type": "Offer",
+                itemOffered: {
+                  "@type": "Service",
+                  name: "Conveyancing & Property Services",
+                  description: "Sales, purchases, remortgages and residential/commercial conveyancing.",
+                },
+              },
+              {
+                "@type": "Offer",
+                itemOffered: {
+                  "@type": "Service",
+                  name: "Auction Conveyancing",
+                  description: "Fast legal pack reviews and full auction transaction handling.",
+                },
+              },
+              {
+                "@type": "Offer",
+                itemOffered: {
+                  "@type": "Service",
+                  name: "Panel Management",
+                  description: "Dedicated conveyancing panel management for estate agents and mortgage brokers.",
+                },
+              },
+            ],
+          },
+        }),
+      },
+    ],
   }),
   component: ServicesPage,
 });
@@ -80,7 +125,7 @@ function ServicesPage() {
                     {p.d}
                   </p>
                   <span className="mt-5 inline-flex items-center gap-1 text-sm font-medium text-primary transition-colors group-hover:text-bronze">
-                    Read more <ChevronRight size={14} />
+                    Explore {p.t} <ChevronRight size={14} />
                   </span>
                 </a>
               );

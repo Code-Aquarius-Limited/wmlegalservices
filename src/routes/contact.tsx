@@ -10,6 +10,26 @@ export const Route = createFileRoute("/contact")({
       { property: "og:title", content: "Contact Us — WM Legal Services" },
       { property: "og:description", content: "Whether you're looking for a quote, ready to instruct, or interested in partnering — we're here to help." },
     ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "LegalService",
+          name: "WM Legal Services",
+          url: "https://wmlegalservices.co.uk/contact",
+          telephone: "+44-20-3292-0669",
+          email: "enquiries@wmlegalservices.co.uk",
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: "30 Churchill Place",
+            addressLocality: "London",
+            postalCode: "E14 5RE",
+            addressCountry: "GB",
+          },
+        }),
+      },
+    ],
   }),
   component: ContactPage,
 });
