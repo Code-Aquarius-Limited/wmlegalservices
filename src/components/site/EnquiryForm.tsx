@@ -65,7 +65,7 @@ export function EnquiryForm({
       form.reset();
     } catch (err) {
       console.error("Failed to submit enquiry:", err);
-      toast.error("Failed to send message. Please try again or email us directly.");
+      toast.error("Something went wrong. Please try again.");
     } finally {
       setSubmitting(false);
     }
