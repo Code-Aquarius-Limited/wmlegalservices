@@ -10,7 +10,7 @@ export function Footer() {
           <img
             src={logoAsset.url}
             alt="WM Legal Services"
-            className="h-24 w-auto object-contain"
+            className="h-14 w-auto object-contain md:h-24"
           />
           <p className="mt-4 text-sm text-primary-foreground/70 leading-relaxed">
             Specialist property law team <strong>**conveyancing services provided under Taylor Rose Solicitors Limited**</strong>{"\u00a0"}who are authorised & regulated by the Solicitors Regulatory Authority.
