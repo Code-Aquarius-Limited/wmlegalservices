@@ -52,7 +52,7 @@ export function Header() {
           <img
             src={logoAsset.url}
             alt="WM Legal Services"
-            className="h-20 w-auto object-contain"
+            className="h-[72px] w-auto object-contain md:h-20"
           />
         </Link>
 
