@@ -124,6 +124,19 @@ export function EnquiryForm({
         />
       </div>
 
+      <div className="mt-6 flex items-start gap-3">
+        <input
+          id="consent"
+          name="consent"
+          type="checkbox"
+          required
+          className="mt-1 h-4 w-4 rounded border-border bg-background text-primary focus:ring-ring/40"
+        />
+        <label htmlFor="consent" className="text-sm text-foreground/90 leading-snug cursor-pointer">
+          I consent to my information being shared with Taylor Rose Solicitors for the purpose of providing my quote.
+        </label>
+      </div>
+
       <button
         type="submit"
         disabled={submitting}
