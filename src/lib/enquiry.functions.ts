@@ -41,6 +41,7 @@ export const sendEnquiryEmail = createServerFn({ method: "POST" })
       <p><strong>Phone:</strong> ${data.phone || "Not provided"}</p>
       <p><strong>Enquiry Type:</strong> ${data.type || "General"}</p>
       <p><strong>Requested Discovery Call Date:</strong> ${data.scheduleCall || "Not requested"}</p>
+      <p><strong>Consent:</strong> ${data.consent ? "Yes — I consent to my information being shared with Taylor Rose Solicitors for the purpose of providing my quote." : "Not provided"}</p>
       <hr />
       <h3>Message</h3>
       <p style="white-space: pre-wrap;">${data.message}</p>
