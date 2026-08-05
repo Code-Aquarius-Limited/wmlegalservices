@@ -14,6 +14,9 @@ export const sendEnquiryEmail = createServerFn({ method: "POST" })
         type: z.string().optional(),
         message: z.string().min(1, "Message is required"),
         subject: z.string().optional(),
+        consent: z.boolean().refine((val) => val === true, {
+          message: "Consent is required to submit this enquiry",
+        }),
       })
       .parse(data)
   )
