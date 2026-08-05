@@ -146,9 +146,6 @@ export function EnquiryForm({
       >
         {submitting ? "Sending…" : "Send enquiry"}
       </button>
-      <p className="mt-4 text-xs text-muted-foreground">
-        By submitting, you agree to be contacted regarding your enquiry. We never share your details.
-      </p>
     </form>
   );
 }
