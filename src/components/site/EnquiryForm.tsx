@@ -47,6 +47,7 @@ export function EnquiryForm({
     const phone = String(fd.get("phone") || "").trim();
     const scheduleCall = String(fd.get("scheduleCall") || "").trim();
     const message = String(fd.get("message") || "").trim();
+    const consent = fd.get("consent") === "on";
 
     try {
       setSubmitting(true);
@@ -59,6 +60,7 @@ export function EnquiryForm({
           type,
           message,
           subject: SUBJECTS[type],
+          consent,
         },
       });
       toast.success("Your email has been sent!");
