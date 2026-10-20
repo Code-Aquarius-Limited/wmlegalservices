@@ -42,6 +42,15 @@ class SFTPWorkflowTests(unittest.TestCase):
             self.assertIn("github.event_name != 'pull_request'", guard, name)
             self.assertIn("inputs.dry_run != 'true'", guard, name)
 
+    def test_static_build_targets_lovable_backend(self):
+        # The form's backend cannot run on FTP hosting, so the static build
+        # must point VITE_ENQUIRY_API_URL at the Lovable-hosted API.
+        step = self.workflow.split("- name: Build project", 1)[1]
+        env = step.split("env:", 1)[1].split("run:", 1)[0]
+        self.assertIn("VITE_ENQUIRY_API_URL", env)
+        self.assertIn("https://wmlegalservices.lovable.app", env)
+
+
 
 if __name__ == "__main__":
     unittest.main()
