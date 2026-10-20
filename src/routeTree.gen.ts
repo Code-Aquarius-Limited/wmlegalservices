@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ServicesRouteImport } from './routes/services'
 import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as ApiPublicEnquiryRouteImport } from './routes/api/public/enquiry'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -34,18 +35,25 @@ const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
   path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicEnquiryRoute = ApiPublicEnquiryRouteImport.update({
+  id: '/api/public/enquiry',
+  path: '/api/public/enquiry',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/api/public/enquiry': typeof ApiPublicEnquiryRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/contact': typeof ContactRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/api/public/enquiry': typeof ApiPublicEnquiryRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -53,13 +61,21 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/services': typeof ServicesRoute
   '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/api/public/enquiry': typeof ApiPublicEnquiryRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/contact' | '/services' | '/sitemap.xml'
+  fullPaths:
+    '/' | '/contact' | '/services' | '/sitemap.xml' | '/api/public/enquiry'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/contact' | '/services' | '/sitemap.xml'
-  id: '__root__' | '/' | '/contact' | '/services' | '/sitemap.xml'
+  to: '/' | '/contact' | '/services' | '/sitemap.xml' | '/api/public/enquiry'
+  id:
+    | '__root__'
+    | '/'
+    | '/contact'
+    | '/services'
+    | '/sitemap.xml'
+    | '/api/public/enquiry'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -67,6 +83,7 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   ServicesRoute: typeof ServicesRoute
   SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  ApiPublicEnquiryRoute: typeof ApiPublicEnquiryRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -99,6 +116,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/enquiry': {
+      id: '/api/public/enquiry'
+      path: '/api/public/enquiry'
+      fullPath: '/api/public/enquiry'
+      preLoaderRoute: typeof ApiPublicEnquiryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -107,6 +131,7 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   ServicesRoute: ServicesRoute,
   SitemapDotxmlRoute: SitemapDotxmlRoute,
+  ApiPublicEnquiryRoute: ApiPublicEnquiryRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -1,7 +1,5 @@
 import { useState, type FormEvent } from "react";
-import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
-import { sendEnquiryEmail } from "@/lib/enquiry.functions";
 
 export type FormType = "general" | "quote" | "auction legal pack" | "auction callback" | "partner";
 
@@ -21,6 +19,10 @@ const TITLES: Record<FormType, string> = {
   partner: "Partner with us",
 };
 
+// Empty = same-origin (dev + the Lovable-hosted site). The SFTP/FTP static
+// build sets VITE_ENQUIRY_API_URL so the form reaches the Lovable-hosted API.
+const ENQUIRY_API_URL = (import.meta.env.VITE_ENQUIRY_API_URL || "").replace(/\/$/, "");
+
 interface Props {
   formType?: FormType;
   showTypeSelector?: boolean;
@@ -36,7 +38,6 @@ export function EnquiryForm({
 }: Props) {
   const [submitting, setSubmitting] = useState(false);
   const [type, setType] = useState<FormType>(formType);
-  const sendEmailFn = useServerFn(sendEnquiryEmail);
 
   const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -47,12 +48,15 @@ export function EnquiryForm({
     const phone = String(fd.get("phone") || "").trim();
     const scheduleCall = String(fd.get("scheduleCall") || "").trim();
     const message = String(fd.get("message") || "").trim();
+    const company = String(fd.get("company") || "").trim();
     const consent = fd.get("consent") === "on";
 
     try {
       setSubmitting(true);
-      await sendEmailFn({
-        data: {
+      const response = await fetch(`${ENQUIRY_API_URL}/api/public/enquiry`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
           name,
           email,
           phone,
@@ -61,8 +65,12 @@ export function EnquiryForm({
           message,
           subject: SUBJECTS[type],
           consent,
-        },
+          company,
+        }),
       });
+      if (!response.ok) {
+        throw new Error(`Enquiry failed with status ${response.status}`);
+      }
       toast.success("Your email has been sent!");
       form.reset();
     } catch (err) {
@@ -72,6 +80,7 @@ export function EnquiryForm({
       setSubmitting(false);
     }
   };
+
 
   return (
     <form
@@ -126,7 +135,18 @@ export function EnquiryForm({
         />
       </div>
 
+      {/* Honeypot field — hidden from real visitors, catches spam bots */}
+      <input
+        type="text"
+        name="company"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="absolute left-[-9999px] h-0 w-0 opacity-0"
+      />
+
       <div className="mt-6 flex items-start gap-3">
+
         <input
           id="consent"
           name="consent"
