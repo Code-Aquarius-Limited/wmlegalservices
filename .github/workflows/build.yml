@@ -6,6 +6,15 @@ on:
   pull_request:
     branches: [main, master]
   workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Dry run: build and upload the artifact, but skip the SFTP upload"
+        required: false
+        default: "false"
+        type: choice
+        options:
+          - "false"
+          - "true"
 
 permissions:
   contents: read
@@ -52,17 +61,17 @@ jobs:
       # start the app's server: the host must support the generated server runtime
       # for page rendering, the sitemap, and enquiry emails to work.
       - name: Set up Python for SFTP
-        if: github.event_name != 'pull_request'
+        if: github.event_name != 'pull_request' && inputs.dry_run != 'true'
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
       - name: Install SFTP client
-        if: github.event_name != 'pull_request'
+        if: github.event_name != 'pull_request' && inputs.dry_run != 'true'
         run: python -m pip install paramiko==4.0.0
 
       - name: Upload build via SFTP
-        if: github.event_name != 'pull_request'
+        if: github.event_name != 'pull_request' && inputs.dry_run != 'true'
         env:
           SFTP_SERVER: ${{ secrets.SFTP_SERVER }}
           SFTP_USERNAME: ${{ secrets.SFTP_USERNAME }}
