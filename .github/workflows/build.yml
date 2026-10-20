@@ -39,8 +39,14 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
+      # The static build cannot run the form's backend, so it posts enquiries
+      # to the Lovable-hosted API instead. Override with a repo variable
+      # VITE_ENQUIRY_API_URL if the backend ever moves.
       - name: Build project
+        env:
+          VITE_ENQUIRY_API_URL: ${{ vars.VITE_ENQUIRY_API_URL || 'https://wmlegalservices.lovable.app' }}
         run: bun run build
+
 
       - name: Create dist.zip
         run: |
