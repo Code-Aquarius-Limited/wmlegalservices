@@ -1,4 +1,4 @@
-name: Build and Package
+name: Build and Deploy via SFTP
 
 on:
   push:
@@ -7,9 +7,17 @@ on:
     branches: [main, master]
   workflow_dispatch:
 
+permissions:
+  contents: read
+
+concurrency:
+  group: sftp-deploy-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -36,3 +44,97 @@ jobs:
           name: dist.zip
           path: dist.zip
           if-no-files-found: error
+
+      # Repository secrets: SFTP_SERVER, SFTP_USERNAME, SFTP_PASSWORD,
+      # SFTP_REMOTE_PATH (the destination folder), and SFTP_KNOWN_HOSTS
+      # (the server's SSH host-key entry, verified with your hosting provider).
+      # Uploads the complete build bundle, not the source code. SFTP does not
+      # start the app's server: the host must support the generated server runtime
+      # for page rendering, the sitemap, and enquiry emails to work.
+      - name: Set up Python for SFTP
+        if: github.event_name != 'pull_request'
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install SFTP client
+        if: github.event_name != 'pull_request'
+        run: python -m pip install paramiko==4.0.0
+
+      - name: Upload build via SFTP
+        if: github.event_name != 'pull_request'
+        env:
+          SFTP_SERVER: ${{ secrets.SFTP_SERVER }}
+          SFTP_USERNAME: ${{ secrets.SFTP_USERNAME }}
+          SFTP_PASSWORD: ${{ secrets.SFTP_PASSWORD }}
+          SFTP_REMOTE_PATH: ${{ secrets.SFTP_REMOTE_PATH }}
+          SFTP_KNOWN_HOSTS: ${{ secrets.SFTP_KNOWN_HOSTS }}
+        run: |
+          python <<'PY'
+          import os
+          import posixpath
+          import stat
+          import tempfile
+          from pathlib import Path
+          import paramiko
+
+          names = (
+              "SFTP_SERVER", "SFTP_USERNAME", "SFTP_PASSWORD",
+              "SFTP_REMOTE_PATH", "SFTP_KNOWN_HOSTS",
+          )
+          missing = [name for name in names if not os.environ.get(name)]
+          if missing:
+              raise SystemExit("Missing GitHub secrets: " + ", ".join(missing))
+
+          remote_root = posixpath.normpath(os.environ["SFTP_REMOTE_PATH"])
+          if remote_root in ("/", ".", ".."):
+              raise SystemExit("SFTP_REMOTE_PATH must name a destination folder, not the server root.")
+          local_root = Path("dist")
+          files = sorted(path for path in local_root.rglob("*") if path.is_file())
+          if not files:
+              raise SystemExit("Build output is empty; nothing was uploaded.")
+
+          client = paramiko.SSHClient()
+          client.set_missing_host_key_policy(paramiko.RejectPolicy())
+          with tempfile.NamedTemporaryFile(mode="w", encoding="utf-8") as known_hosts:
+              known_hosts.write(os.environ["SFTP_KNOWN_HOSTS"] + "\n")
+              known_hosts.flush()
+              client.load_host_keys(known_hosts.name)
+
+          try:
+              client.connect(
+                  hostname=os.environ["SFTP_SERVER"],
+                  port=22,
+                  username=os.environ["SFTP_USERNAME"],
+                  password=os.environ["SFTP_PASSWORD"],
+                  look_for_keys=False,
+                  allow_agent=False,
+                  timeout=30,
+                  banner_timeout=30,
+                  auth_timeout=30,
+              )
+              with client.open_sftp() as sftp:
+                  sftp.get_channel().settimeout(60)
+                  directories = set()
+
+                  def ensure_directory(directory):
+                      if directory in directories or directory in ("/", ".", ""):
+                          return
+                      ensure_directory(posixpath.dirname(directory))
+                      try:
+                          attributes = sftp.stat(directory)
+                      except FileNotFoundError:
+                          sftp.mkdir(directory)
+                      else:
+                          if not stat.S_ISDIR(attributes.st_mode):
+                              raise RuntimeError("A deployment directory is occupied by a file.")
+                      directories.add(directory)
+
+                  for source in files:
+                      destination = posixpath.join(remote_root, source.relative_to(local_root).as_posix())
+                      ensure_directory(posixpath.dirname(destination))
+                      sftp.put(str(source), destination, confirm=True)
+                  print(f"Successfully uploaded {len(files)} build files via SFTP on port 22.")
+          finally:
+              client.close()
+          PY
