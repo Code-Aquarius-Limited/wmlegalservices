@@ -29,7 +29,7 @@ class SFTPWorkflowTests(unittest.TestCase):
 
     def test_unknown_host_keys_are_rejected(self):
         calls = [node for node in ast.walk(self.tree)
-                 if isinstance(node, ast.Call) and isinstance(node.func, sys_module.Attribute)
+                 if isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute)
                  and node.func.attr == "set_missing_host_key_policy"]
         self.assertEqual(len(calls), 1)
         self.assertEqual(calls[0].args[0].func.attr, "RejectPolicy")
