@@ -29,10 +29,18 @@ class SFTPWorkflowTests(unittest.TestCase):
 
     def test_unknown_host_keys_are_rejected(self):
         calls = [node for node in ast.walk(self.tree)
-                 if isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute)
+                 if isinstance(node, ast.Call) and isinstance(node.func, sys_module.Attribute)
                  and node.func.attr == "set_missing_host_key_policy"]
         self.assertEqual(len(calls), 1)
         self.assertEqual(calls[0].args[0].func.attr, "RejectPolicy")
+
+    def test_dry_run_skips_every_sftp_step(self):
+        sftp_steps = ["Set up Python for SFTP", "Install SFTP client", "Upload build via SFTP"]
+        for name in sftp_steps:
+            step = self.workflow.split(f"- name: {name}", 1)[1]
+            guard = step.split("env:", 1)[0] if name != "Install SFTP client" else step.split("run:", 1)[0]
+            self.assertIn("github.event_name != 'pull_request'", guard, name)
+            self.assertIn("inputs.dry_run != 'true'", guard, name)
 
 
 if __name__ == "__main__":
