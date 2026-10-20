@@ -1,0 +1,117 @@
+# Builds the static site and uploads it to the IONOS webspace over SFTP on every push to main.
+# Every Lovable edit is a push to main, so each change in Lovable goes live automatically.
+#
+# Only the front end is uploaded. The enquiry form backend (src/routes/api/public/enquiry.ts) and
+# media uploaded in Lovable stay on the published Lovable app, https://wmlegalservices.lovable.app,
+# so press Publish in Lovable after changing the form backend.
+#
+# Repository secrets:
+#   SFTP_SERVER        SFTP host, e.g. access-1234567.webspace-host.com
+#   SFTP_USERNAME
+#   SFTP_PASSWORD
+#   SFTP_REMOTE_PATH   folder the domain points to in IONOS, e.g. / or /wmlegalservices
+#   SFTP_PORT          optional, default 22
+#   SFTP_KNOWN_HOSTS   recommended: the server's host key; while unset, the log prints the value to save
+# Repository variable (optional):
+#   VITE_ENQUIRY_API_URL   where the form posts, default https://wmlegalservices.lovable.app
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Dry run: connect and list what would change, upload nothing"
+        type: boolean
+        default: false
+
+# Deploys run one at a time and are never cut off mid-upload; a newer push replaces a waiting run.
+concurrency:
+  group: deploy-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - uses: oven-sh/setup-bun@v2
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      # Prerenders every page to dist/client and checks the result (scripts/static/postbuild.mjs).
+      - name: Build static site
+        env:
+          VITE_ENQUIRY_API_URL: ${{ vars.VITE_ENQUIRY_API_URL }}
+        run: bun run build:static
+
+      - name: Keep a copy of the build
+        uses: actions/upload-artifact@v4
+        with:
+          name: site
+          path: dist/client/
+          include-hidden-files: true
+          retention-days: 7
+
+      - name: Install lftp
+        if: github.event_name != 'pull_request'
+        run: sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+
+      - name: Upload over SFTP
+        if: github.event_name != 'pull_request'
+        env:
+          SFTP_SERVER: ${{ secrets.SFTP_SERVER }}
+          SFTP_PORT: ${{ secrets.SFTP_PORT }}
+          SFTP_USERNAME: ${{ secrets.SFTP_USERNAME }}
+          SFTP_PASSWORD: ${{ secrets.SFTP_PASSWORD }}
+          SFTP_REMOTE_PATH: ${{ secrets.SFTP_REMOTE_PATH }}
+          SFTP_KNOWN_HOSTS: ${{ secrets.SFTP_KNOWN_HOSTS }}
+          DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run }}
+        run: |
+          set -euo pipefail
+          for name in SFTP_SERVER SFTP_USERNAME SFTP_PASSWORD SFTP_REMOTE_PATH; do
+            if [ -z "${!name:-}" ]; then echo "::error::Repository secret $name is not set"; exit 1; fi
+          done
+          port="${SFTP_PORT:-22}"
+          remote="${SFTP_REMOTE_PATH%/}"
+
+          mkdir -p ~/.ssh && chmod 700 ~/.ssh
+          if [ -n "${SFTP_KNOWN_HOSTS:-}" ]; then
+            printf '%s\n' "$SFTP_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          else
+            ssh-keyscan -H -p "$port" "$SFTP_SERVER" > ~/.ssh/known_hosts 2>/dev/null
+            echo "::warning::SFTP_KNOWN_HOSTS is not set, so the server's key was trusted without checking. Save the lines below as that secret."
+            cat ~/.ssh/known_hosts
+          fi
+
+          dry=""
+          if [ "$DRY_RUN" = "true" ]; then dry="--dry-run"; echo "Dry run: nothing on the server will change"; fi
+
+          # Nothing outside assets/ is ever deleted, so other files in the webspace are safe.
+          # 1) New content-hashed assets first, so new pages never point at missing files.
+          # 2) Pages, .htaccess, sitemap and other root files.
+          # 3) Delete assets left over from earlier builds.
+          export LFTP_PASSWORD="$SFTP_PASSWORD"
+          lftp --env-password -u "$SFTP_USERNAME" -p "$port" "sftp://$SFTP_SERVER" <<EOF
+          set cmd:fail-exit yes
+          set net:max-retries 3
+          set net:timeout 30
+          set sftp:connect-program "ssh -a -x -o StrictHostKeyChecking=yes -o UserKnownHostsFile=$HOME/.ssh/known_hosts -o PubkeyAuthentication=no"
+          mirror --reverse --ignore-time --no-perms --parallel=4 --verbose=1 $dry dist/client/assets/ "$remote/assets/"
+          mirror --reverse --no-perms --parallel=4 --verbose=1 $dry --exclude-glob assets/ dist/client/ "$remote/"
+          mirror --reverse --delete --ignore-time --no-perms --verbose=1 $dry dist/client/assets/ "$remote/assets/"
+          bye
+          EOF

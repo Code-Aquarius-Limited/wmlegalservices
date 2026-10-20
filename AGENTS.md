@@ -9,5 +9,6 @@
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
 
-- GitHub Actions uploads the full `dist` bundle via password-based SFTP on port 22 after successful branch builds; verified host keys are mandatory, pull requests never deploy, and remote files are not deleted. SFTP transfers artifacts only and does not provision the server runtime required by this app.
-- Enquiry emails are sent by the public CORS-enabled server route `src/routes/api/public/enquiry.ts` running on the Lovable-hosted app. Static SFTP builds cannot run server code, so the workflow injects `VITE_ENQUIRY_API_URL` (default `https://wmlegalservices.lovable.app`) at build time and the form posts to that URL; keep the Lovable project published or the form breaks.
+- Every push to `main` runs `.github/workflows/deploy.yml`: `bun run build:static` (`vite.static.config.ts` + `scripts/static/postbuild.mjs`) prerenders each page to `dist/client`, which is uploaded to the IONOS webspace over SFTP (lftp, port 22). Pull requests build but never upload. Only stale files in `assets/` are deleted on the server. Keep `vite.config.ts` for Lovable's own build.
+- The SFTP host serves static files only. Don't use `createServerFn` (the static build fails on it); server code belongs in `src/routes/api/public/*`, which runs on the published Lovable app.
+- Enquiry emails are sent by `src/routes/api/public/enquiry.ts` on the Lovable app. The static build points the form at `VITE_ENQUIRY_API_URL` (default `https://wmlegalservices.lovable.app`) and loads media from `src/assets/*.asset.json` there too, so keep the Lovable project published, and publish again after changing that route.
