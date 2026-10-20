@@ -135,7 +135,18 @@ export function EnquiryForm({
         />
       </div>
 
+      {/* Honeypot field — hidden from real visitors, catches spam bots */}
+      <input
+        type="text"
+        name="company"
+        tabIndex={-1}
+        autoComplete="off"
+        aria-hidden="true"
+        className="absolute left-[-9999px] h-0 w-0 opacity-0"
+      />
+
       <div className="mt-6 flex items-start gap-3">
+
         <input
           id="consent"
           name="consent"
