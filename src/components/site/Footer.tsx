@@ -1,6 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Instagram, Mail, Phone, MapPin } from "lucide-react";
-import logoAsset from "@/assets/WM_Legal_Services_Logo_white.png.asset.json";
+import logo from "@/assets/WM_Legal_Services_Logo_white.png";
 
 export function Footer() {
   return (
@@ -8,7 +8,7 @@ export function Footer() {
       <div className="container-prose py-16 grid gap-12 md:grid-cols-4">
         <div className="md:col-span-2 max-w-sm">
           <img
-            src={logoAsset.url}
+            src={logo}
             alt="WM Legal Services"
             className="h-14 w-auto object-contain md:h-24"
           />
